@@ -128,9 +128,9 @@ function Index() {
         <div className="absolute inset-0 bg-hero-overlay" />
         <div className="relative mx-auto max-w-7xl px-5 py-24 md:py-36">
           <span className="tagline">Premium barbershop</span>
-          <h1 className="mt-5 font-display text-5xl leading-[0.95] uppercase md:text-7xl">
+          <h1 className="mt-5 font-display text-4xl leading-[1.1] uppercase md:text-6xl">
             Sharp cuts.<br />Clean lines.<br />
-            <span className="font-script text-6xl italic tracking-wide text-primary md:text-8xl">Every time.</span>
+            <span className="font-script text-5xl text-primary md:text-7xl">Every time.</span>
           </h1>
           <p className="mt-6 max-w-md text-muted-foreground">Precision fades, beard work, kids cuts and detailed designs. The Next Cut team is here to keep you looking your best.</p>
           <div className="mt-8 flex flex-wrap gap-4">
