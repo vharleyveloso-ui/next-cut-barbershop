@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Define typography families through global font tokens and load remote fonts in the root head; this keeps typography consistent without remote CSS imports.
