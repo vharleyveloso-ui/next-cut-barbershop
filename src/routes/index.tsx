@@ -151,12 +151,12 @@ function Index() {
           ].map(([Icon, t, s, p]: any) => (
             <div key={t} className="flex items-center gap-4 border-b px-6 py-7 sm:border-r lg:border-b-0">
               <div className="grid size-14 shrink-0 place-items-center rounded-full border border-primary/60 text-primary"><Icon className="size-6" /></div>
-              <div><div className="font-bold tracking-wide">{t}</div><div className="text-xs uppercase text-muted-foreground">{s}</div><div className="mt-1 text-sm font-bold text-primary">{p}</div></div>
+              <div><div className="font-semibold tracking-wide">{t}</div><div className="text-xs uppercase text-muted-foreground">{s}</div><div className="mt-1 text-sm font-semibold text-primary">{p}</div></div>
             </div>
           ))}
           <a href={BOOK} target="_blank" rel="noreferrer" className="group flex items-center gap-4 px-6 py-7 transition hover:bg-card">
             <CalendarCheck className="size-10 shrink-0 text-primary" />
-            <div className="flex-1"><div className="font-bold tracking-wide">BOOK YOUR APPOINTMENT</div><div className="text-xs uppercase text-muted-foreground">Quick. Easy. Online.</div></div>
+            <div className="flex-1"><div className="font-semibold tracking-wide">BOOK YOUR APPOINTMENT</div><div className="text-xs uppercase text-muted-foreground">Quick. Easy. Online.</div></div>
             <ArrowRight className="size-5 text-primary transition group-hover:translate-x-1" />
           </a>
         </div>
@@ -180,7 +180,7 @@ function Index() {
             ].map(([Icon, t, s]: any) => (
               <li key={t} className="flex items-center gap-4">
                 <div className="grid size-11 shrink-0 place-items-center rounded-full border bg-card"><Icon className="size-5" /></div>
-                <div><div className="text-sm font-bold">{t}</div><div className="text-sm text-muted-foreground">{s}</div></div>
+                <div><div className="text-sm font-semibold">{t}</div><div className="text-sm text-muted-foreground">{s}</div></div>
               </li>
             ))}
           </ul>
@@ -192,14 +192,14 @@ function Index() {
         <div className="mx-auto max-w-7xl px-5 py-20">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <Head tag="Meet the barbers" title="Our team" sub="Different styles. Same standard." />
-            <a href={BOOK} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-xs font-bold tracking-wider hover:text-primary">BOOK WITH YOUR BARBER <ArrowRight className="size-4 text-primary" /></a>
+            <a href={BOOK} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-xs font-semibold tracking-wider hover:text-primary">BOOK WITH YOUR BARBER <ArrowRight className="size-4 text-primary" /></a>
           </div>
           <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
             {barbers.map(([n, r, f]) => (
               <div key={n} className="card-glow overflow-hidden p-3">
                 <img src={IMG + f} alt={`${n}, ${r} at Next Cut`} loading="lazy" className="aspect-[4/5] w-full rounded-sm object-cover" />
                 <div className="mt-3 flex items-start justify-between">
-                  <div><div className="font-bold">{n}</div><div className="text-[0.65rem] uppercase text-muted-foreground">{r}</div></div>
+                  <div><div className="font-semibold">{n}</div><div className="text-[0.65rem] uppercase text-muted-foreground">{r}</div></div>
                   <a href={IG} target="_blank" rel="noreferrer" aria-label="Instagram" className="hover:text-primary"><Instagram className="size-4" /></a>
                 </div>
                 <a href={BOOK} target="_blank" rel="noreferrer" className="btn-outline mt-3 w-full px-2 py-2">Book now <ArrowRight className="size-3" /></a>
@@ -222,7 +222,7 @@ function Index() {
                 <div key={f} className="card-glow relative w-60 shrink-0 snap-start overflow-hidden">
                   <img src={IMG + f} alt={`Haircut by ${b}`} loading="lazy" className="aspect-[4/5] w-full object-cover" />
                   <div className="absolute inset-0 bg-bottom-overlay" />
-                  <div className="absolute bottom-3 left-3"><div className="text-sm font-bold">{b}</div><div className="text-[0.6rem] uppercase text-muted-foreground">Master Barber</div></div>
+                  <div className="absolute bottom-3 left-3"><div className="text-sm font-semibold">{b}</div><div className="text-[0.6rem] uppercase text-muted-foreground">Master Barber</div></div>
                   <Instagram className="absolute right-3 bottom-4 size-4" />
                 </div>
               ))}
@@ -248,7 +248,7 @@ function Index() {
                 <div key={a} className="card-glow p-6">
                   <div className="flex gap-1 text-primary">{[...Array(5)].map((_, i) => <Star key={i} className="size-4 fill-primary" />)}</div>
                   <p className="mt-4 text-sm text-muted-foreground">"{t}"</p>
-                  <div className="mt-5 text-sm font-bold">{a}</div>
+                  <div className="mt-5 text-sm font-semibold">{a}</div>
                 </div>
               ))}
             </div>
@@ -275,12 +275,12 @@ function Index() {
             <a href={BOOK} target="_blank" rel="noreferrer" className="btn-red mt-6">Book now <ArrowRight className="size-4" /></a>
           </div>
           <div className="border-t px-6 py-10 lg:border-t-0 lg:border-l">
-            <div className="flex items-center gap-2 text-xs font-bold tracking-wider"><MapPin className="size-4 text-primary" />OUR LOCATION</div>
+            <div className="flex items-center gap-2 text-xs font-semibold tracking-wider"><MapPin className="size-4 text-primary" />OUR LOCATION</div>
             <p className="mt-3 text-sm text-muted-foreground">1723 W Oak Ridge Rd,<br />Orlando, FL 32809</p>
             <a href={MAPS} target="_blank" rel="noreferrer" className="btn-outline mt-6">Get directions <ArrowRight className="size-4" /></a>
           </div>
           <div className="border-t px-6 py-10 lg:border-t-0 lg:border-l">
-            <div className="flex items-center gap-2 text-xs font-bold tracking-wider"><Clock className="size-4 text-primary" />OPENING HOURS</div>
+            <div className="flex items-center gap-2 text-xs font-semibold tracking-wider"><Clock className="size-4 text-primary" />OPENING HOURS</div>
             <p className="mt-3 text-sm text-muted-foreground">Mon - Sat: 9:00 AM - 8:00 PM<br />Sun: 9:00 AM - 6:00 PM</p>
             <div className="mt-6"><Socials /></div>
           </div>
