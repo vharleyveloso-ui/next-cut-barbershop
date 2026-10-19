@@ -211,7 +211,7 @@ function Index() {
 
       {/* GALLERY */}
       <section id="galeria" className="border-b">
-        <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 py-20 lg:grid-cols-[1fr_3fr]">
+        <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 py-20 [&>*]:min-w-0 lg:grid-cols-[1fr_3fr]">
           <div>
             <Head tag="Our work" title="Gallery" sub="Real cuts. Real people. Real results." />
             <a href={IG} target="_blank" rel="noreferrer" className="btn-outline mt-6">View gallery <ArrowRight className="size-4" /></a>
