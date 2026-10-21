@@ -14,6 +14,7 @@ import b0045 from "@/assets/barbers/b0045.jpg.asset.json";
 import b0048 from "@/assets/barbers/b0048.jpg.asset.json";
 import b0051 from "@/assets/barbers/b0051.jpg.asset.json";
 import b0053 from "@/assets/barbers/b0053.jpg.asset.json";
+import mello from "@/assets/barbers/mello.jpg.asset.json";
 
 const IMG = "https://nextcutpro.com/wp-content/uploads/2026/05/";
 const HERO = IMG + "WhatsApp-Image-2026-05-29-at-7.32-2.jpg";
@@ -46,7 +47,7 @@ const nav = [
 
 const barbers = [
   ["ALEX", "Master Barber", IMG + "Alex.webp"], ["ANYEL", "Barber", b0045.url], ["ADDIS", "Barber", b0042.url],
-  ["ZAPATA", "Barber", IMG + "Zapata.webp"], ["ABEL", "Barber", b0033.url], ["TITO", "Barber", b0048.url],
+  ["MELLO", "Barber", mello.url], ["ABEL", "Barber", b0033.url], ["TITO", "Barber", b0048.url],
   ["Deyker", "Barber", b0027.url], ["Jordan", "Barber", b0030.url], ["Oscar", "Barber", b0036.url],
   ["BARBER", "Barber", b0039.url], ["JEFFERSON ", "Barber", b0051.url], ["OSCAR", "Barber", b0053.url],
 ];
