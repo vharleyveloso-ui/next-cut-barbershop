@@ -4,6 +4,16 @@ import {
   Instagram, Facebook, MapPin, Clock, Music2, ChevronLeft, ChevronRight, Menu,
 } from "lucide-react";
 import { useRef, useState } from "react";
+import b0027 from "@/assets/barbers/b0027.jpg.asset.json";
+import b0030 from "@/assets/barbers/b0030.jpg.asset.json";
+import b0033 from "@/assets/barbers/b0033.jpg.asset.json";
+import b0036 from "@/assets/barbers/b0036.jpg.asset.json";
+import b0039 from "@/assets/barbers/b0039.jpg.asset.json";
+import b0042 from "@/assets/barbers/b0042.jpg.asset.json";
+import b0045 from "@/assets/barbers/b0045.jpg.asset.json";
+import b0048 from "@/assets/barbers/b0048.jpg.asset.json";
+import b0051 from "@/assets/barbers/b0051.jpg.asset.json";
+import b0053 from "@/assets/barbers/b0053.jpg.asset.json";
 
 const IMG = "https://nextcutpro.com/wp-content/uploads/2026/05/";
 const HERO = IMG + "WhatsApp-Image-2026-05-29-at-7.32-2.jpg";
@@ -35,8 +45,10 @@ const nav = [
 ];
 
 const barbers = [
-  ["ALEX", "Master Barber", "Alex.webp"], ["ANYEL", "Barber", "Anyel.webp"], ["ADDIS", "Barber", "Addis.webp"],
-  ["ZAPATA", "Barber", "Zapata.webp"], ["ABEL", "Barber", "Abel.webp"], ["TITO", "Barber", "Tito.webp"],
+  ["ALEX", "Master Barber", IMG + "Alex.webp"], ["ANYEL", "Barber", b0045.url], ["ADDIS", "Barber", b0042.url],
+  ["ZAPATA", "Barber", IMG + "Zapata.webp"], ["ABEL", "Barber", b0033.url], ["TITO", "Barber", b0048.url],
+  ["NEW BARBER", "Barber", b0027.url], ["NEW BARBER", "Barber", b0030.url], ["NEW BARBER", "Barber", b0036.url],
+  ["NEW BARBER", "Barber", b0039.url], ["NEW BARBER", "Barber", b0051.url], ["NEW BARBER", "Barber", b0053.url],
 ];
 
 const gallery = [
