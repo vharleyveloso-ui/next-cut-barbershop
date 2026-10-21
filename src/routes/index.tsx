@@ -47,15 +47,15 @@ const nav = [
 
 const barbers = [
   ["ALEX", "Master Barber", IMG + "Alex.webp"], ["ANYEL", "Barber", b0045.url], ["ADDIS", "Barber", b0042.url],
-  ["MELLO", "Barber", mello.url], ["ABEL", "Barber", b0033.url], ["TITO", "Barber", b0048.url],
+  ["MELLO", "Barber", mello.url], ["ABEL", "Barber", b0033.url], ["EDGAR", "Barber", b0048.url],
   ["Deyker", "Barber", b0027.url], ["Jordan", "Barber", b0030.url], ["Oscar", "Barber", b0036.url],
-  ["BARBER", "Barber", b0039.url], ["JEFFERSON ", "Barber", b0051.url], ["OSCAR", "Barber", b0053.url],
+  ["EMÍLIO ", "Barber", b0039.url], ["JEFFERSON ", "Barber", b0051.url], ["ZAPATA", "Barber", b0053.url],
 ];
 
 const gallery = [
   ["nextcut_hair9.jpeg", "ALEX"], ["nextcut_hair10.jpeg", "ANYEL"], ["nextcut_hair7.jpeg", "ADDIS"],
   ["WhatsApp-Image-2026-05-29-at-1.49.06-PM.jpeg", "ZAPATA"], ["nextcut_hair4.jpeg", "ABEL"],
-  ["WhatsApp-Image-2026-05-29-at-1.48.31-PM.jpeg", "TITO"],
+  ["WhatsApp-Image-2026-05-29-at-1.48.31-PM.jpeg", "EDGAR"],
 ];
 
 const reviews = [
@@ -235,7 +235,7 @@ function Index() {
                 <div key={f} className="card-glow relative w-60 shrink-0 snap-start overflow-hidden">
                   <img src={IMG + f} alt={`Haircut by ${b}`} loading="lazy" className="aspect-[4/5] w-full object-cover" />
                   <div className="absolute inset-0 bg-bottom-overlay" />
-                  <div className="absolute bottom-3 left-3"><div className="text-sm font-semibold">{b}</div><div className="text-[0.6rem] uppercase text-muted-foreground">Master Barber</div></div>
+                  <div className="absolute bottom-3 left-3"><div className="text-sm font-semibold">{b}</div><div className="text-[0.6rem] uppercase text-muted-foreground"> BARBER</div></div>
                   <Instagram className="absolute right-3 bottom-4 size-4" />
                 </div>
               ))}
