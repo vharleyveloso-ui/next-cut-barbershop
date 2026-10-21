@@ -207,9 +207,9 @@ function Index() {
             <a href={BOOK} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-xs font-semibold tracking-wider hover:text-primary">BOOK WITH YOUR BARBER <ArrowRight className="size-4 text-primary" /></a>
           </div>
           <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
-            {barbers.map(([n, r, f]) => (
-              <div key={n} className="card-glow overflow-hidden p-3">
-                <img src={IMG + f} alt={`${n}, ${r} at Next Cut`} loading="lazy" className="aspect-[4/5] w-full rounded-sm object-cover" />
+            {barbers.map(([n, r, f], i) => (
+              <div key={i} className="card-glow overflow-hidden p-3">
+                <img src={f} alt={`${n}, ${r} at Next Cut`} loading="lazy" className="aspect-[4/5] w-full rounded-sm object-cover object-top" />
                 <div className="mt-3 flex items-start justify-between">
                   <div><div className="font-semibold">{n}</div><div className="text-[0.65rem] uppercase text-muted-foreground">{r}</div></div>
                   <a href={IG} target="_blank" rel="noreferrer" aria-label="Instagram" className="hover:text-primary"><Instagram className="size-4" /></a>
