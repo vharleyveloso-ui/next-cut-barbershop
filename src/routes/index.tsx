@@ -47,8 +47,8 @@ const nav = [
 const barbers = [
   ["ALEX", "Master Barber", IMG + "Alex.webp"], ["ANYEL", "Barber", b0045.url], ["ADDIS", "Barber", b0042.url],
   ["ZAPATA", "Barber", IMG + "Zapata.webp"], ["ABEL", "Barber", b0033.url], ["TITO", "Barber", b0048.url],
-  ["NEW BARBER", "Barber", b0027.url], ["NEW BARBER", "Barber", b0030.url], ["NEW BARBER", "Barber", b0036.url],
-  ["NEW BARBER", "Barber", b0039.url], ["NEW BARBER", "Barber", b0051.url], ["NEW BARBER", "Barber", b0053.url],
+  ["Deyker", "Barber", b0027.url], ["Jordan", "Barber", b0030.url], ["Oscar", "Barber", b0036.url],
+  ["BARBER", "Barber", b0039.url], ["JEFFERSON ", "Barber", b0051.url], ["OSCAR", "Barber", b0053.url],
 ];
 
 const gallery = [
