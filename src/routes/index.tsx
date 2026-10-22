@@ -1,72 +1,51 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
   ArrowRight, Phone, Star, Scissors, Smile, Package, CalendarCheck, Users, DoorOpen, Baby, ShieldCheck,
-  Instagram, Facebook, MapPin, Clock, Music2, ChevronLeft, ChevronRight, Menu,
+  Instagram, Facebook, MapPin, Clock, Music2, ChevronLeft, ChevronRight, Menu, X, Navigation, MessageCircle,
 } from "lucide-react";
-import { useRef, useState } from "react";
-import b0027 from "@/assets/barbers/b0027.jpg.asset.json";
-import b0030 from "@/assets/barbers/b0030.jpg.asset.json";
-import b0033 from "@/assets/barbers/b0033.jpg.asset.json";
-import b0036 from "@/assets/barbers/b0036.jpg.asset.json";
-import b0039 from "@/assets/barbers/b0039.jpg.asset.json";
-import b0042 from "@/assets/barbers/b0042.jpg.asset.json";
-import b0045 from "@/assets/barbers/b0045.jpg.asset.json";
-import b0048 from "@/assets/barbers/b0048.jpg.asset.json";
-import b0051 from "@/assets/barbers/b0051.jpg.asset.json";
-import b0053 from "@/assets/barbers/b0053.jpg.asset.json";
-import mello from "@/assets/barbers/mello.jpg.asset.json";
+import { useEffect, useRef, useState } from "react";
+import { BUSINESS, BARBERS, GALLERY, PROMOTIONS, SERVICES, fullAddress } from "@/lib/business";
+import { CutFinder } from "@/components/CutFinder";
 
-const IMG = "https://nextcutpro.com/wp-content/uploads/2026/05/";
-const HERO = IMG + "WhatsApp-Image-2026-05-29-at-7.32-2.jpg";
-const INTERIOR = IMG + "194860800_4100891979977577_1968845463827463481_n.jpg";
-const BOOK = "https://squareup.com/appointments/book/BV32J23P8XBXG";
-const IG = "https://www.instagram.com/nextcut1_official/";
-const PHONE = "tel:+14076107845";
-const MAPS = "https://maps.google.com/?q=1723+W+Oak+Ridge+Rd,+Orlando,+FL+32809";
+const B = BUSINESS;
+const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BarberShop",
+  name: B.name,
+  telephone: "+1-407-610-7845",
+  image: B.heroImage,
+  address: { "@type": "PostalAddress", streetAddress: B.street, addressLocality: B.city, addressRegion: B.region, postalCode: B.zip, addressCountry: "US" },
+  openingHoursSpecification: B.hours.map((h) => ({ "@type": "OpeningHoursSpecification", dayOfWeek: h.schema, opens: h.opens, closes: h.closes })),
+  sameAs: [B.instagram, B.facebook, B.tiktok].filter(Boolean),
+};
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Next Cut Barbershop — Sharp Cuts in Orlando, FL" },
-      { name: "description", content: "Precision fades, beard work, kids cuts and designs at Next Cut Barbershop, 1723 W Oak Ridge Rd, Orlando. Book online." },
-      { property: "og:title", content: "Next Cut Barbershop — Orlando" },
+      { title: "Next Cut Barbershop — Barbers in Orlando, FL | Book Online" },
+      { name: "description", content: `Fades, scissor cuts, beard work and kids cuts at Next Cut Barbershop, ${fullAddress}. Walk-ins welcome. Book online.` },
+      { property: "og:title", content: "Next Cut Barbershop — Orlando, FL" },
       { property: "og:description", content: "Sharp cuts. Clean lines. Every time. Book your next cut online." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:image", content: HERO },
-      { name: "twitter:image", content: HERO },
+      { property: "og:image", content: B.heroImage },
+      { name: "twitter:image", content: B.heroImage },
     ],
+    scripts: [{ type: "application/ld+json", children: JSON.stringify(jsonLd) }],
   }),
   component: Index,
 });
 
 const nav = [
-  ["HOME", "#home"], ["SERVIÇOS", "#servicos"], ["BARBEIROS", "#barbeiros"],
-  ["GALERIA", "#galeria"], ["AVALIAÇÕES", "#avaliacoes"], ["LOCALIZAÇÃO", "#localizacao"],
-];
-
-const barbers = [
-  ["ALEX", "Master Barber", IMG + "Alex.webp"], ["ANYEL", "Barber", b0045.url], ["ADDIS", "Barber", b0042.url],
-  ["MELLO", "Barber", mello.url], ["ABEL", "Barber", b0033.url], ["EDGAR", "Barber", b0048.url],
-  ["Deyker", "Barber", b0027.url], ["Jordan", "Barber", b0030.url], ["Oscar", "Barber", b0036.url],
-  ["EMÍLIO ", "Barber", b0039.url], ["JEFFERSON ", "Barber", b0051.url], ["ZAPATA", "Barber", b0053.url],
-];
-
-const gallery = [
-  ["nextcut_hair9.jpeg", "ALEX"], ["nextcut_hair10.jpeg", "ANYEL"], ["nextcut_hair7.jpeg", "ADDIS"],
-  ["WhatsApp-Image-2026-05-29-at-1.49.06-PM.jpeg", "ZAPATA"], ["nextcut_hair4.jpeg", "ABEL"],
-  ["WhatsApp-Image-2026-05-29-at-1.48.31-PM.jpeg", "EDGAR"],
-];
-
-const reviews = [
-  ["Best barbershop in Orlando! Clean place, great vibes and amazing cuts. 100% recommend!", "Daniel S."],
-  ["The team is professional and always delivers. My go-to barbershop!", "Marcus T."],
-  ["Great service, clean environment and the best fade I've ever had.", "James R."],
+  ["Home", "#home"], ["Services", "#services"], ["Barbers", "#barbers"],
+  ["Gallery", "#gallery"], ["Reviews", "#reviews"], ["Location", "#location"],
 ];
 
 function Logo() {
   return (
-    <a href="#home" className="flex flex-col leading-none">
+    <a href="#home" className="flex flex-col leading-none" aria-label="Next Cut Barbershop home">
       <span className="font-display text-2xl tracking-tight">
         NEXT<Star className="mx-0.5 inline size-4 -translate-y-0.5 fill-primary text-primary" />CUT
       </span>
@@ -76,21 +55,12 @@ function Logo() {
 }
 
 function Socials() {
+  const items = [
+    [B.instagram, "Instagram", Instagram], [B.tiktok, "TikTok", Music2], [B.facebook, "Facebook", Facebook],
+  ].filter(([u]) => u) as [string, string, typeof Instagram][];
   return (
     <div className="flex gap-4">
-      <a href={IG} target="_blank" rel="noreferrer" aria-label="Instagram" className="hover:text-primary"><Instagram className="size-5" /></a>
-      <a href="#" aria-label="TikTok" className="hover:text-primary"><Music2 className="size-5" /></a>
-      <a href="#" aria-label="Facebook" className="hover:text-primary"><Facebook className="size-5" /></a>
-    </div>
-  );
-}
-
-function Rating({ small }: { small?: boolean }) {
-  return (
-    <div className={`rounded-md border bg-background/80 text-center backdrop-blur ${small ? "px-3 py-2" : "px-5 py-4"}`}>
-      <div className={`font-display ${small ? "text-xl" : "text-3xl"}`}>4.9 <Star className="inline size-4 -translate-y-1 fill-foreground" /></div>
-      <div className="text-[0.6rem] tracking-widest text-muted-foreground">ON BOOKSY</div>
-      {!small && <div className="mt-2 font-semibold">booksy</div>}
+      {items.map(([u, l, I]) => <a key={l} href={u} {...ext} aria-label={`Next Cut on ${l}`} className="grid size-10 place-items-center rounded-full border transition hover:border-primary hover:text-primary"><I className="size-4" /></a>)}
     </div>
   );
 }
@@ -99,101 +69,138 @@ function Head({ tag, title, sub }: { tag: string; title: string; sub?: string })
   return (
     <div>
       <span className="tagline">{tag}</span>
-      <h2 className="mt-3 font-display text-3xl uppercase md:text-4xl">{title}</h2>
+      <h2 className="mt-3 font-display text-3xl md:text-4xl">{title}</h2>
       {sub && <p className="mt-2 text-muted-foreground">{sub}</p>}
+    </div>
+  );
+}
+
+function Lightbox({ index, onClose, onMove }: { index: number; onClose: () => void; onMove: (d: number) => void }) {
+  useEffect(() => {
+    const k = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); if (e.key === "ArrowRight") onMove(1); if (e.key === "ArrowLeft") onMove(-1); };
+    window.addEventListener("keydown", k);
+    document.body.style.overflow = "hidden";
+    return () => { window.removeEventListener("keydown", k); document.body.style.overflow = ""; };
+  }, [onClose, onMove]);
+  const g = GALLERY[index];
+  return (
+    <div role="dialog" aria-modal="true" aria-label="Photo viewer" className="fixed inset-0 z-[60] grid place-items-center bg-background/95 p-4" onClick={onClose}>
+      <img src={g.src} alt={g.alt} className="max-h-[85vh] max-w-full rounded-md object-contain" onClick={(e) => e.stopPropagation()} />
+      <button onClick={onClose} aria-label="Close photo" className="btn-outline absolute top-4 right-4 p-2"><X className="size-5" /></button>
+      <button onClick={(e) => { e.stopPropagation(); onMove(-1); }} aria-label="Previous photo" className="btn-outline absolute left-3 p-2"><ChevronLeft className="size-5" /></button>
+      <button onClick={(e) => { e.stopPropagation(); onMove(1); }} aria-label="Next photo" className="btn-outline absolute right-3 p-2"><ChevronRight className="size-5" /></button>
     </div>
   );
 }
 
 function Index() {
   const [open, setOpen] = useState(false);
+  const [lb, setLb] = useState<number | null>(null);
   const track = useRef<HTMLDivElement>(null);
   const scroll = (d: number) => track.current?.scrollBy({ left: d * 280, behavior: "smooth" });
+  const icons = { haircut: Scissors, beard: Smile, combo: Package, kids: Baby, design: Star } as const;
+  const wa = B.whatsapp ? `https://wa.me/${B.whatsapp}?text=${encodeURIComponent("Hi Next Cut! I have a question about your services and appointments.")}` : "";
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* NAV */}
+    <div className="min-h-screen bg-background pb-20 lg:pb-0">
       <header className="sticky top-0 z-50 border-b bg-background/90 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4">
           <Logo />
-          <nav className="hidden gap-7 lg:flex">
-            {nav.map(([l, h], i) => (
-              <a key={h} href={h} className={`pb-1 text-xs font-semibold tracking-wider transition hover:text-primary ${i === 0 ? "border-b-2 border-primary" : "text-muted-foreground"}`}>{l}</a>
-            ))}
+          <nav className="hidden gap-7 lg:flex" aria-label="Main">
+            {nav.map(([l, h]) => <a key={h} href={h} className="pb-1 text-xs font-semibold tracking-wider text-muted-foreground uppercase transition hover:text-primary">{l}</a>)}
           </nav>
-          <div className="flex items-center gap-5">
-            <a href={PHONE} className="hidden items-center gap-2 text-sm font-semibold md:flex"><Phone className="size-4" />(407) 610-7845</a>
-            <a href={BOOK} target="_blank" rel="noreferrer" className="btn-red hidden sm:inline-flex">Book now <ArrowRight className="size-4" /></a>
-            <button className="lg:hidden" onClick={() => setOpen(!open)} aria-label="Menu"><Menu /></button>
+          <div className="flex items-center gap-4">
+            <a href={B.phoneHref} className="hidden items-center gap-2 text-sm font-semibold md:flex"><Phone className="size-4" />{B.phoneDisplay}</a>
+            <a href={B.bookingUrl} {...ext} className="btn-red hidden sm:inline-flex">Book now <ArrowRight className="size-4" /></a>
+            <button className="grid size-11 place-items-center lg:hidden" onClick={() => setOpen(!open)} aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open}>{open ? <X /> : <Menu />}</button>
           </div>
         </div>
         {open && (
-          <nav className="flex flex-col gap-4 border-t px-5 py-5 lg:hidden">
-            {nav.map(([l, h]) => <a key={h} href={h} onClick={() => setOpen(false)} className="text-sm font-semibold tracking-wider">{l}</a>)}
-            <a href={BOOK} className="btn-red w-fit">Book now <ArrowRight className="size-4" /></a>
+          <nav className="flex flex-col border-t px-5 py-3 lg:hidden" aria-label="Mobile">
+            {nav.map(([l, h]) => <a key={h} href={h} onClick={() => setOpen(false)} className="py-3 text-sm font-semibold tracking-wider uppercase">{l}</a>)}
+            <a href={B.phoneHref} className="flex items-center gap-2 py-3 text-sm font-semibold"><Phone className="size-4 text-primary" />{B.phoneDisplay}</a>
           </nav>
         )}
       </header>
 
       {/* HERO */}
       <section id="home" className="relative overflow-hidden border-b">
-        <img src={HERO} alt="Barber fading a client at Next Cut" className="absolute inset-0 h-full w-full object-cover object-[70%_30%]" />
+        <img src={B.heroImage} alt="Barber finishing a fade at Next Cut Barbershop in Orlando" width={1600} height={1000} fetchPriority="high" className="absolute inset-0 h-full w-full object-cover object-[70%_30%]" />
         <div className="absolute inset-0 bg-hero-overlay" />
-        <div className="relative mx-auto max-w-7xl px-5 py-24 md:py-36">
-          <span className="tagline">Premium barbershop</span>
-          <h1 className="mt-5 font-display text-4xl leading-[1.1] uppercase md:text-6xl">
+        <div className="reveal relative mx-auto max-w-7xl px-5 py-20 md:py-32">
+          <span className="tagline">Barbershop · Orlando, FL</span>
+          <h1 className="mt-5 font-display text-[2rem] leading-[1.1] sm:text-4xl md:text-6xl">
             Sharp cuts.<br />Clean lines.<br />
-            <span className="font-script text-5xl text-primary md:text-7xl">Every time.</span>
+            <span className="font-script text-[2.5rem] text-primary sm:text-5xl md:text-7xl">Every time.</span>
           </h1>
-          <p className="mt-6 max-w-md text-muted-foreground">Precision fades, beard work, kids cuts and detailed designs. The Next Cut team is here to keep you looking your best.</p>
-          <div className="mt-8 flex flex-wrap gap-4">
-            <a href={BOOK} target="_blank" rel="noreferrer" className="btn-red">Book now <ArrowRight className="size-4" /></a>
-            <a href="#servicos" className="btn-outline">View services</a>
+          <p className="mt-6 max-w-md text-muted-foreground">Next Cut Barbershop is Orlando's spot for fades, scissor cuts, beard work and kids cuts. Book online in a minute or walk right in.</p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <a href={B.bookingUrl} {...ext} className="btn-red">Book now <ArrowRight className="size-4" /></a>
+            <a href={B.mapsUrl} {...ext} className="btn-outline bg-background/40"><Navigation className="size-4" />Get directions</a>
           </div>
+          <p className="mt-5 flex items-center gap-2 text-sm text-muted-foreground"><MapPin className="size-4 text-primary" />{fullAddress}</p>
         </div>
-        <div className="absolute right-6 bottom-6 hidden md:block"><Rating /></div>
       </section>
 
-      {/* STATS */}
-      <section id="servicos" className="border-b">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-          {[
-            [Scissors, "HAIRCUTS", "Clean. Sharp. Professional.", "FROM $27"],
-            [Smile, "BEARD", "Defined. Clean. Fresh.", "FROM $13"],
-            [Package, "COMBOS", "Haircut + Beard", "FROM $40"],
-          ].map(([Icon, t, s, p]: any) => (
-            <div key={t} className="flex items-center gap-4 border-b px-6 py-7 sm:border-r lg:border-b-0">
-              <div className="grid size-14 shrink-0 place-items-center rounded-full border border-primary/60 text-primary"><Icon className="size-6" /></div>
-              <div><div className="font-semibold tracking-wide">{t}</div><div className="text-xs uppercase text-muted-foreground">{s}</div><div className="mt-1 text-sm font-semibold text-primary">{p}</div></div>
+      {/* SERVICES */}
+      <section id="services" className="scroll-mt-20 border-b">
+        <div className="mx-auto max-w-7xl px-5 py-16">
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <Head tag="Services & prices" title="What we do" />
+            <a href={B.bookingUrl} {...ext} className="flex items-center gap-2 text-xs font-semibold tracking-wider uppercase hover:text-primary"><CalendarCheck className="size-4 text-primary" />See full menu & book</a>
+          </div>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            {SERVICES.map((s) => {
+              const Icon = icons[s.id];
+              return (
+                <div key={s.id} className="reveal card-glow flex items-center gap-4 p-5 lg:flex-col lg:items-start">
+                  <div className="grid size-12 shrink-0 place-items-center rounded-full border border-primary/60 text-primary"><Icon className="size-5" /></div>
+                  <div><div className="font-semibold tracking-wide uppercase">{s.name}</div><div className="text-xs text-muted-foreground">{s.note}</div>
+                    <div className="mt-1 text-sm font-semibold text-primary">{s.price ?? "See booking page"}</div></div>
+                </div>
+              );
+            })}
+          </div>
+          {PROMOTIONS.length > 0 && (
+            <div className="mt-6 grid gap-4 md:grid-cols-2">
+              {PROMOTIONS.map((p) => (
+                <div key={p.days + p.text} className="rounded-md border border-primary/60 bg-card p-5">
+                  <div className="text-xs font-semibold tracking-wider text-primary uppercase">{p.days}</div>
+                  <div className="mt-1 font-semibold">{p.text} — <span className="text-primary">{p.price}</span></div>
+                </div>
+              ))}
             </div>
-          ))}
-          <a href={BOOK} target="_blank" rel="noreferrer" className="group flex items-center gap-4 px-6 py-7 transition hover:bg-card">
-            <CalendarCheck className="size-10 shrink-0 text-primary" />
-            <div className="flex-1"><div className="font-semibold tracking-wide">BOOK YOUR APPOINTMENT</div><div className="text-xs uppercase text-muted-foreground">Quick. Easy. Online.</div></div>
-            <ArrowRight className="size-5 text-primary transition group-hover:translate-x-1" />
-          </a>
+          )}
+        </div>
+      </section>
+
+      {/* AI CUT FINDER */}
+      <section id="cut-finder" className="scroll-mt-20 border-b">
+        <div className="mx-auto max-w-7xl px-5 py-16">
+          <Head tag="Not sure what to book?" title="Find your cut" sub="Describe the look you want and our style assistant suggests the right service." />
+          <div className="mt-8"><CutFinder /></div>
         </div>
       </section>
 
       {/* ABOUT */}
       <section className="border-b">
         <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 py-20 lg:grid-cols-[1fr_1.3fr_1fr]">
-          <div>
+          <div className="reveal">
             <Head tag="About Next Cut" title="More than a barbershop." />
-            <p className="mt-6 text-muted-foreground">We're not just cutting hair — we're building confidence. At Next Cut, you get top-tier barbers, a clean environment and a premium experience from the moment you walk in.</p>
-            <a href="#barbeiros" className="btn-outline mt-8">Our story <ArrowRight className="size-4" /></a>
+            <p className="mt-6 text-muted-foreground">We're not just cutting hair — we're building confidence. At Next Cut, you get skilled barbers, a clean shop and a premium experience from the moment you walk in.</p>
+            <a href="#barbers" className="btn-outline mt-8">Meet the team <ArrowRight className="size-4" /></a>
           </div>
-          <img src={INTERIOR} alt="Next Cut barbershop interior" className="aspect-[4/3] w-full rounded-md border object-cover" />
+          <img src={B.interiorImage} alt="Inside Next Cut Barbershop" width={1200} height={900} loading="lazy" className="reveal aspect-[4/3] w-full rounded-md border object-cover" />
           <ul className="space-y-7 lg:border-l lg:pl-8">
             {[
-              [Users, "12+ BARBERS", "Experienced. Professional."],
-              [DoorOpen, "WALK-INS WELCOME", "No appointment needed."],
-              [Baby, "FAMILY FRIENDLY", "All ages. All styles."],
-              [ShieldCheck, "PREMIUM GROOMING", "Because you deserve the best."],
+              [Users, `${BARBERS.length} barbers`, "Experienced. Professional."],
+              [DoorOpen, "Walk-ins welcome", "No appointment needed."],
+              [Baby, "Family friendly", "All ages. All styles."],
+              [ShieldCheck, "Premium grooming", "Because you deserve the best."],
             ].map(([Icon, t, s]: any) => (
-              <li key={t} className="flex items-center gap-4">
+              <li key={t} className="reveal flex items-center gap-4">
                 <div className="grid size-11 shrink-0 place-items-center rounded-full border bg-card"><Icon className="size-5" /></div>
-                <div><div className="text-sm font-semibold">{t}</div><div className="text-sm text-muted-foreground">{s}</div></div>
+                <div><div className="text-sm font-semibold uppercase">{t}</div><div className="text-sm text-muted-foreground">{s}</div></div>
               </li>
             ))}
           </ul>
@@ -201,21 +208,16 @@ function Index() {
       </section>
 
       {/* TEAM */}
-      <section id="barbeiros" className="border-b">
+      <section id="barbers" className="scroll-mt-20 border-b">
         <div className="mx-auto max-w-7xl px-5 py-20">
-          <div className="flex flex-wrap items-end justify-between gap-6">
-            <Head tag="Meet the barbers" title="Our team" sub="Different styles. Same standard." />
-            <a href={BOOK} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-xs font-semibold tracking-wider hover:text-primary">BOOK WITH YOUR BARBER <ArrowRight className="size-4 text-primary" /></a>
-          </div>
-          <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
-            {barbers.map(([n, r, f], i) => (
-              <div key={i} className="card-glow overflow-hidden p-3">
-                <img src={f} alt={`${n}, ${r} at Next Cut`} loading="lazy" className="aspect-[4/5] w-full rounded-sm object-cover object-top" />
-                <div className="mt-3 flex items-start justify-between">
-                  <div><div className="font-semibold">{n}</div><div className="text-[0.65rem] uppercase text-muted-foreground">{r}</div></div>
-                  <a href={IG} target="_blank" rel="noreferrer" aria-label="Instagram" className="hover:text-primary"><Instagram className="size-4" /></a>
-                </div>
-                <a href={BOOK} target="_blank" rel="noreferrer" className="btn-outline mt-3 w-full px-2 py-2">Book now <ArrowRight className="size-3" /></a>
+          <Head tag="Meet the barbers" title="Our team" sub="Different styles. Same standard. Choose your barber in the booking app." />
+          <div className="mt-10 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-6">
+            {BARBERS.map((b) => (
+              <div key={b.name} className="reveal card-glow flex flex-col overflow-hidden p-2.5 sm:p-3">
+                <img src={b.photo} alt={`${b.name}, barber at Next Cut`} width={400} height={500} loading="lazy" className="aspect-[4/5] w-full rounded-sm bg-muted object-cover object-top" />
+                <div className="mt-3 font-semibold">{b.name}</div>
+                <div className="text-[0.65rem] text-muted-foreground uppercase">Barber</div>
+                <a href={b.bookingUrl ?? B.bookingUrl} {...ext} className="btn-outline mt-3 w-full px-2 py-2.5 text-[0.62rem]">Book with {b.name}</a>
               </div>
             ))}
           </div>
@@ -223,53 +225,42 @@ function Index() {
       </section>
 
       {/* GALLERY */}
-      <section id="galeria" className="border-b">
+      <section id="gallery" className="scroll-mt-20 border-b">
         <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 py-20 [&>*]:min-w-0 lg:grid-cols-[1fr_3fr]">
           <div>
-            <Head tag="Our work" title="Gallery" sub="Real cuts. Real people. Real results." />
-            <a href={IG} target="_blank" rel="noreferrer" className="btn-outline mt-6">View gallery <ArrowRight className="size-4" /></a>
+            <Head tag="Our work" title="Gallery" sub="Real cuts from our chairs. Tap a photo to view it." />
+            <a href={B.instagram} {...ext} className="btn-outline mt-6"><Instagram className="size-4" />More on Instagram</a>
           </div>
-          <div className="relative">
+          <div>
             <div ref={track} className="flex snap-x gap-4 overflow-x-auto pb-2 [scrollbar-width:none]">
-              {gallery.map(([f, b]) => (
-                <div key={f} className="card-glow relative w-60 shrink-0 snap-start overflow-hidden">
-                  <img src={IMG + f} alt={`Haircut by ${b}`} loading="lazy" className="aspect-[4/5] w-full object-cover" />
+              {GALLERY.map((g, i) => (
+                <button key={g.src} onClick={() => setLb(i)} aria-label={`View photo: ${g.alt}`} className="card-glow relative w-56 shrink-0 snap-start overflow-hidden text-left sm:w-60">
+                  <img src={g.src} alt={g.alt} width={480} height={600} loading="lazy" className="aspect-[4/5] w-full bg-muted object-cover" />
                   <div className="absolute inset-0 bg-bottom-overlay" />
-                  <div className="absolute bottom-3 left-3"><div className="text-sm font-semibold">{b}</div><div className="text-[0.6rem] uppercase text-muted-foreground"> BARBER</div></div>
-                  <Instagram className="absolute right-3 bottom-4 size-4" />
-                </div>
+                  <div className="absolute bottom-3 left-3 text-xs font-semibold tracking-wider uppercase">{g.tag}</div>
+                </button>
               ))}
             </div>
             <div className="mt-4 flex justify-end gap-2">
-              <button onClick={() => scroll(-1)} aria-label="Previous" className="btn-outline p-2"><ChevronLeft className="size-4" /></button>
-              <button onClick={() => scroll(1)} aria-label="Next" className="btn-outline p-2"><ChevronRight className="size-4" /></button>
+              <button onClick={() => scroll(-1)} aria-label="Scroll gallery left" className="btn-outline p-2.5"><ChevronLeft className="size-4" /></button>
+              <button onClick={() => scroll(1)} aria-label="Scroll gallery right" className="btn-outline p-2.5"><ChevronRight className="size-4" /></button>
             </div>
           </div>
         </div>
       </section>
+      {lb !== null && <Lightbox index={lb} onClose={() => setLb(null)} onMove={(d) => setLb((lb + d + GALLERY.length) % GALLERY.length)} />}
 
       {/* REVIEWS */}
-      <section id="avaliacoes" className="border-b">
-        <div className="mx-auto grid max-w-7xl gap-8 px-5 py-20 lg:grid-cols-[3fr_1fr]">
-          <div>
-            <div className="flex flex-wrap items-end justify-between gap-4">
-              <Head tag="Client reviews" title="What our clients say" />
-              <Rating small />
-            </div>
-            <div className="mt-8 grid gap-4 md:grid-cols-3">
-              {reviews.map(([t, a]) => (
-                <div key={a} className="card-glow p-6">
-                  <div className="flex gap-1 text-primary">{[...Array(5)].map((_, i) => <Star key={i} className="size-4 fill-primary" />)}</div>
-                  <p className="mt-4 text-sm text-muted-foreground">"{t}"</p>
-                  <div className="mt-5 text-sm font-semibold">{a}</div>
-                </div>
-              ))}
-            </div>
+      <section id="reviews" className="scroll-mt-20 border-b">
+        <div className="mx-auto grid max-w-7xl items-center gap-8 px-5 py-20 lg:grid-cols-[2fr_1fr]">
+          <div className="reveal">
+            <Head tag="Client reviews" title="What our clients say" sub="Read what real customers say about Next Cut on Google — and leave your own after your cut." />
+            <a href={B.reviewsUrl} {...ext} className="btn-red mt-8"><Star className="size-4 fill-current" />Read our Google reviews</a>
           </div>
-          <div className="relative min-h-64 overflow-hidden rounded-md border">
-            <img src={IMG + "nextcut_hair4.jpeg"} alt="" className="absolute inset-0 h-full w-full object-cover opacity-50" />
+          <div className="relative min-h-56 overflow-hidden rounded-md border">
+            <img src={GALLERY[0].src} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover opacity-50" />
             <div className="absolute inset-0 bg-bottom-overlay" />
-            <div className="relative flex h-full flex-col justify-end p-6 text-right">
+            <div className="relative flex h-full min-h-56 flex-col justify-end p-6 text-right">
               <div className="font-display text-2xl leading-tight">REAL PEOPLE.<br />REAL RESULTS.</div>
               <div className="mt-2 text-xs tracking-[0.3em] text-primary">#NEXTCUT</div>
             </div>
@@ -277,37 +268,53 @@ function Index() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section id="localizacao" className="border-b">
+      {/* LOCATION */}
+      <section id="location" className="scroll-mt-20 border-b">
         <div className="mx-auto grid max-w-7xl lg:grid-cols-[1fr_1.4fr_1fr_1fr]">
-          <img src={INTERIOR} alt="Next Cut shop" className="h-56 w-full object-cover lg:h-full" />
+          <img src={B.interiorImage} alt="Next Cut Barbershop storefront area" loading="lazy" className="h-56 w-full object-cover lg:h-full" />
           <div className="px-6 py-10">
             <span className="tagline">Ready for your next cut?</span>
-            <h2 className="mt-3 font-display text-2xl md:text-3xl">BOOK YOUR APPOINTMENT</h2>
-            <p className="mt-1 text-muted-foreground">Quick. Easy. Online.</p>
-            <a href={BOOK} target="_blank" rel="noreferrer" className="btn-red mt-6">Book now <ArrowRight className="size-4" /></a>
+            <h2 className="mt-3 font-display text-2xl md:text-3xl">Book your appointment</h2>
+            <p className="mt-1 text-muted-foreground">Online booking or walk-ins welcome.</p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a href={B.bookingUrl} {...ext} className="btn-red">Book now <ArrowRight className="size-4" /></a>
+              <a href={B.phoneHref} className="btn-outline"><Phone className="size-4" />{B.phoneDisplay}</a>
+            </div>
           </div>
           <div className="border-t px-6 py-10 lg:border-t-0 lg:border-l">
-            <div className="flex items-center gap-2 text-xs font-semibold tracking-wider"><MapPin className="size-4 text-primary" />OUR LOCATION</div>
-            <p className="mt-3 text-sm text-muted-foreground">1723 W Oak Ridge Rd,<br />Orlando, FL 32809</p>
-            <a href={MAPS} target="_blank" rel="noreferrer" className="btn-outline mt-6">Get directions <ArrowRight className="size-4" /></a>
+            <div className="flex items-center gap-2 text-xs font-semibold tracking-wider uppercase"><MapPin className="size-4 text-primary" />Our location</div>
+            <address className="mt-3 text-sm text-muted-foreground not-italic">{B.street},<br />{B.city}, {B.region} {B.zip}</address>
+            <a href={B.mapsUrl} {...ext} className="btn-outline mt-6"><Navigation className="size-4" />Get directions</a>
           </div>
           <div className="border-t px-6 py-10 lg:border-t-0 lg:border-l">
-            <div className="flex items-center gap-2 text-xs font-semibold tracking-wider"><Clock className="size-4 text-primary" />OPENING HOURS</div>
-            <p className="mt-3 text-sm text-muted-foreground">Mon - Sat: 9:00 AM - 8:00 PM<br />Sun: 9:00 AM - 6:00 PM</p>
+            <div className="flex items-center gap-2 text-xs font-semibold tracking-wider uppercase"><Clock className="size-4 text-primary" />Opening hours</div>
+            <dl className="mt-3 space-y-1 text-sm">
+              {B.hours.map((h) => <div key={h.days} className="flex justify-between gap-4"><dt className="text-muted-foreground">{h.days}</dt><dd>{h.time}</dd></div>)}
+            </dl>
             <div className="mt-6"><Socials /></div>
           </div>
         </div>
       </section>
 
-      {/* FOOTER */}
       <footer className="mx-auto flex max-w-7xl flex-col gap-8 px-5 py-12 md:flex-row md:items-center md:justify-between">
         <Logo />
-        <a href={PHONE} className="flex items-center gap-2 text-sm"><Phone className="size-4 text-primary" />(407) 610-7845</a>
-        <div className="flex items-center gap-2 text-sm"><MapPin className="size-4 text-primary" />1723 W Oak Ridge Rd, Orlando, FL 32809</div>
-        <div><div className="mb-2 text-[0.6rem] tracking-[0.3em] text-muted-foreground">FOLLOW US</div><Socials /></div>
+        <a href={B.phoneHref} className="flex items-center gap-2 text-sm"><Phone className="size-4 text-primary" />{B.phoneDisplay}</a>
+        <a href={B.mapsUrl} {...ext} className="flex items-center gap-2 text-sm hover:text-primary"><MapPin className="size-4 text-primary" />{fullAddress}</a>
+        <Socials />
         <p className="text-xs text-muted-foreground">© 2026 Next Cut Barbershop.<br />All rights reserved.</p>
       </footer>
+
+      {/* Mobile sticky actions */}
+      <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-[1fr_auto_auto] gap-2 border-t bg-background/95 p-3 backdrop-blur lg:hidden">
+        <a href={B.bookingUrl} {...ext} className="btn-red justify-center">Book now <ArrowRight className="size-4" /></a>
+        <a href={B.mapsUrl} {...ext} aria-label="Get directions" className="btn-outline px-3.5"><Navigation className="size-4" /></a>
+        <a href={B.phoneHref} aria-label={`Call ${B.phoneDisplay}`} className="btn-outline px-3.5"><Phone className="size-4" /></a>
+      </div>
+      {wa && (
+        <a href={wa} {...ext} aria-label="Chat with Next Cut on WhatsApp" className="fixed right-4 bottom-20 z-40 grid size-12 place-items-center rounded-full bg-primary text-primary-foreground shadow-glow lg:bottom-6">
+          <MessageCircle className="size-5" />
+        </a>
+      )}
     </div>
   );
 }
