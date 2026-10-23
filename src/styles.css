@@ -70,10 +70,8 @@
 @utility shadow-glow { box-shadow: var(--glow-red); }
 
 @keyframes reveal-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .reveal { animation: reveal-in linear both; animation-timeline: view(); animation-range: entry 0% entry 35%; }
-  }
+@media (prefers-reduced-motion: no-preference) {
+  .reveal { animation: reveal-in .5s ease-out both; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
