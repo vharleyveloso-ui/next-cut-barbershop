@@ -1,0 +1,3 @@
+- [x] Site audit improvements + AI cut finder
+- [x] WhatsApp/Instagram/TikTok links
+- [ ] Confirm prices, Tue/Wed promos, Sunday hours, Facebook URL, barber specialties (waiting on client)

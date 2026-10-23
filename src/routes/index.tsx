@@ -99,7 +99,7 @@ function Index() {
   const track = useRef<HTMLDivElement>(null);
   const scroll = (d: number) => track.current?.scrollBy({ left: d * 280, behavior: "smooth" });
   const icons = { haircut: Scissors, beard: Smile, combo: Package, kids: Baby, design: Star } as const;
-  const wa = B.whatsapp ? `https://wa.me/${B.whatsapp}?text=${encodeURIComponent("Hi Next Cut! I have a question about your services and appointments.")}` : "";
+  const wa = B.whatsapp ? `https://wa.me/${B.whatsapp}?text=${encodeURIComponent(B.whatsappText)}` : "";
 
   return (
     <div className="min-h-screen bg-background pb-20 lg:pb-0">
