@@ -184,7 +184,7 @@ function Index() {
 
       {/* ABOUT */}
       <section className="border-b">
-        <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 py-20 lg:grid-cols-[1fr_1.3fr_1fr]">
+        <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 py-20 [&>*]:min-w-0 [&_h2]:break-words lg:grid-cols-[1fr_1.3fr_1fr]">
           <div className="reveal">
             <Head tag="About Next Cut" title="More than a barbershop." />
             <p className="mt-6 text-muted-foreground">We're not just cutting hair — we're building confidence. At Next Cut, you get skilled barbers, a clean shop and a premium experience from the moment you walk in.</p>
