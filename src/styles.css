@@ -62,7 +62,7 @@
 @layer base {
   * { border-color: var(--color-border); }
   html { scroll-behavior: smooth; }
-  body { background-color: var(--color-background); color: var(--color-foreground); font-family: var(--font-sans); }
+  body { overflow-x: clip; background-color: var(--color-background); color: var(--color-foreground); font-family: var(--font-sans); }
   .font-display { font-family: var(--font-display); font-weight: 800; text-transform: uppercase; letter-spacing: .01em; }
   .font-script { font-family: var(--font-script); font-weight: 400; font-style: normal; text-transform: none; letter-spacing: 0; }
 }
