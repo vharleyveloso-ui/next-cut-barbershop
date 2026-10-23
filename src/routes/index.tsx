@@ -270,11 +270,11 @@ function Index() {
 
       {/* LOCATION */}
       <section id="location" className="scroll-mt-20 border-b">
-        <div className="mx-auto grid max-w-7xl lg:grid-cols-[1fr_1.4fr_1fr_1fr]">
+        <div className="mx-auto grid max-w-7xl [&>*]:min-w-0 lg:grid-cols-[1fr_1.4fr_1fr_1fr]">
           <img src={B.interiorImage} alt="Next Cut Barbershop storefront area" loading="lazy" className="h-56 w-full object-cover lg:h-full" />
           <div className="px-6 py-10">
             <span className="tagline">Ready for your next cut?</span>
-            <h2 className="mt-3 font-display text-2xl md:text-3xl">Book your appointment</h2>
+            <h2 className="mt-3 font-display text-xl sm:text-2xl md:text-3xl">Book your appointment</h2>
             <p className="mt-1 text-muted-foreground">Online booking or walk-ins welcome.</p>
             <div className="mt-6 flex flex-wrap gap-3">
               <a href={B.bookingUrl} {...ext} className="btn-red">Book now <ArrowRight className="size-4" /></a>
