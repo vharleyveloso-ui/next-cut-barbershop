@@ -82,7 +82,7 @@ function Lightbox({ index, onClose, onMove }: { index: number; onClose: () => vo
     document.body.style.overflow = "hidden";
     return () => { window.removeEventListener("keydown", k); document.body.style.overflow = ""; };
   }, [onClose, onMove]);
-  const g = GALLERY[index];
+  const g = GALLERY[index]!;
   return (
     <div role="dialog" aria-modal="true" aria-label="Photo viewer" className="fixed inset-0 z-[60] grid place-items-center bg-background/95 p-4" onClick={onClose}>
       <img src={g.src} alt={g.alt} className="max-h-[85vh] max-w-full rounded-md object-contain" onClick={(e) => e.stopPropagation()} />
@@ -258,7 +258,7 @@ function Index() {
             <a href={B.reviewsUrl} {...ext} className="btn-red mt-8"><Star className="size-4 fill-current" />Read our Google reviews</a>
           </div>
           <div className="relative min-h-56 overflow-hidden rounded-md border">
-            <img src={GALLERY[0].src} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover opacity-50" />
+            <img src={GALLERY[0]!.src} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover opacity-50" />
             <div className="absolute inset-0 bg-bottom-overlay" />
             <div className="relative flex h-full min-h-56 flex-col justify-end p-6 text-right">
               <div className="font-display text-2xl leading-tight">REAL PEOPLE.<br />REAL RESULTS.</div>
