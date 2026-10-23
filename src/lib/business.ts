@@ -35,9 +35,10 @@ export const BUSINESS = {
   mapsUrl: "https://www.google.com/maps/dir/?api=1&destination=Next+Cut+Barbershop,+1723+W+Oak+Ridge+Rd,+Orlando,+FL+32809",
   reviewsUrl: "https://www.google.com/maps/search/?api=1&query=Next+Cut+Barbershop+1723+W+Oak+Ridge+Rd+Orlando+FL",
   instagram: "https://www.instagram.com/nextcut1_official/",
+  whatsappText: "Hi Next Cut! I'd like to book a cut. What times are available?",
   facebook: "", // PENDING: official URL
-  tiktok: "", // PENDING: official URL
-  whatsapp: "", // PENDING: verified WhatsApp number, digits only e.g. "14075551234"
+  tiktok: "https://www.tiktok.com/@nextcut1",
+  whatsapp: "14077616338",
   hours: [
     { days: "Mon – Sat", time: "9:00 AM – 8:00 PM", schema: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], opens: "09:00", closes: "20:00" },
     { days: "Sunday", time: "9:00 AM – 6:00 PM", schema: ["Sunday"], opens: "09:00", closes: "18:00" }, // PENDING: brief said 10 AM

@@ -82,7 +82,7 @@ function Lightbox({ index, onClose, onMove }: { index: number; onClose: () => vo
     document.body.style.overflow = "hidden";
     return () => { window.removeEventListener("keydown", k); document.body.style.overflow = ""; };
   }, [onClose, onMove]);
-  const g = GALLERY[index];
+  const g = GALLERY[index]!;
   return (
     <div role="dialog" aria-modal="true" aria-label="Photo viewer" className="fixed inset-0 z-[60] grid place-items-center bg-background/95 p-4" onClick={onClose}>
       <img src={g.src} alt={g.alt} className="max-h-[85vh] max-w-full rounded-md object-contain" onClick={(e) => e.stopPropagation()} />
@@ -99,7 +99,7 @@ function Index() {
   const track = useRef<HTMLDivElement>(null);
   const scroll = (d: number) => track.current?.scrollBy({ left: d * 280, behavior: "smooth" });
   const icons = { haircut: Scissors, beard: Smile, combo: Package, kids: Baby, design: Star } as const;
-  const wa = B.whatsapp ? `https://wa.me/${B.whatsapp}?text=${encodeURIComponent("Hi Next Cut! I have a question about your services and appointments.")}` : "";
+  const wa = B.whatsapp ? `https://wa.me/${B.whatsapp}?text=${encodeURIComponent(B.whatsappText)}` : "";
 
   return (
     <div className="min-h-screen bg-background pb-20 lg:pb-0">
@@ -184,7 +184,7 @@ function Index() {
 
       {/* ABOUT */}
       <section className="border-b">
-        <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 py-20 lg:grid-cols-[1fr_1.3fr_1fr]">
+        <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 py-20 [&>*]:min-w-0 [&_h2]:break-words lg:grid-cols-[1fr_1.3fr_1fr]">
           <div className="reveal">
             <Head tag="About Next Cut" title="More than a barbershop." />
             <p className="mt-6 text-muted-foreground">We're not just cutting hair — we're building confidence. At Next Cut, you get skilled barbers, a clean shop and a premium experience from the moment you walk in.</p>
@@ -258,7 +258,7 @@ function Index() {
             <a href={B.reviewsUrl} {...ext} className="btn-red mt-8"><Star className="size-4 fill-current" />Read our Google reviews</a>
           </div>
           <div className="relative min-h-56 overflow-hidden rounded-md border">
-            <img src={GALLERY[0].src} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover opacity-50" />
+            <img src={GALLERY[0]!.src} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover opacity-50" />
             <div className="absolute inset-0 bg-bottom-overlay" />
             <div className="relative flex h-full min-h-56 flex-col justify-end p-6 text-right">
               <div className="font-display text-2xl leading-tight">REAL PEOPLE.<br />REAL RESULTS.</div>
@@ -270,11 +270,11 @@ function Index() {
 
       {/* LOCATION */}
       <section id="location" className="scroll-mt-20 border-b">
-        <div className="mx-auto grid max-w-7xl lg:grid-cols-[1fr_1.4fr_1fr_1fr]">
+        <div className="mx-auto grid max-w-7xl [&>*]:min-w-0 lg:grid-cols-[1fr_1.4fr_1fr_1fr]">
           <img src={B.interiorImage} alt="Next Cut Barbershop storefront area" loading="lazy" className="h-56 w-full object-cover lg:h-full" />
           <div className="px-6 py-10">
             <span className="tagline">Ready for your next cut?</span>
-            <h2 className="mt-3 font-display text-2xl md:text-3xl">Book your appointment</h2>
+            <h2 className="mt-3 font-display text-xl sm:text-2xl md:text-3xl">Book your appointment</h2>
             <p className="mt-1 text-muted-foreground">Online booking or walk-ins welcome.</p>
             <div className="mt-6 flex flex-wrap gap-3">
               <a href={B.bookingUrl} {...ext} className="btn-red">Book now <ArrowRight className="size-4" /></a>
