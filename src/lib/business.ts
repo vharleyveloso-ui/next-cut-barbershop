@@ -55,14 +55,33 @@ export const BUSINESS = {
 
 export const fullAddress = `${BUSINESS.street}, ${BUSINESS.city}, ${BUSINESS.region} ${BUSINESS.zip}`;
 
-// PENDING: prices below come from the original brief and differ from the old site ($30 haircut, $15 beard). Confirm with client.
+// Confirmed client menu, October 24, 2026. Null amounts explicitly mean variable pricing.
+export type Service = { id: string; name: string; nameEs: string; amount: number | null; minutes: number; price: string; note: string };
+const menu = (id: string, name: string, nameEs: string, amount: number | null, minutes: number): Service => ({
+  id, name, nameEs, amount, minutes, price: amount === null ? "Price varies" : `$${amount.toFixed(2)}`, note: `${minutes} min`,
+});
 export const SERVICES = [
-  { id: "haircut", name: "Haircut", note: "Fades, tapers, scissor cuts", price: "From $27" },
-  { id: "beard", name: "Beard", note: "Line-up, trim & shaping", price: "From $13" },
-  { id: "combo", name: "Haircut + Beard", note: "The full refresh", price: "From $40" },
-  { id: "kids", name: "Kids Cut", note: "All ages welcome", price: null },
-  { id: "design", name: "Hair Design", note: "Custom lines & art", price: null },
-] as const;
+  menu("women", "Women's Haircut", "Corte de mujer", null, 60),
+  menu("shape-up", "Shape Up", "Perfilado", 15, 15),
+  menu("kids", "Children regular cuts", "Corte regular para niños", 25, 30),
+  menu("haircut-eyebrows", "Haircut Eyebrows", "Corte y cejas", 35, 30),
+  menu("color", "Color Treatment", "Tratamiento de color", null, 45),
+  menu("shape-beard", "Shape Up & beard hot towel", "Perfilado y barba con toalla caliente", 25, 30),
+  menu("combo", "Haircuts & beard", "Corte y barba", 40, 30),
+  menu("shampoo", "Shampoo Style", "Lavado y peinado", null, 60),
+  menu("combo-eyebrows", "Haircuts beard & Eyebrows", "Corte, barba y cejas", 45, 45),
+  menu("haircut", "Men's Haircut", "Corte de hombre", 25, 30),
+  menu("beard-conditioning", "Beard conditioning", "Acondicionamiento de barba", 20, 15),
+  menu("beard-dye", "Beard dyeing", "Tinte de barba", 20, 15),
+  menu("beard", "Beard trim", "Recorte de barba", 20, 15),
+  menu("buzz", "Buzz cut", "Corte al ras", 30, 35),
+  menu("curly", "Curly hair", "Cabello rizado", 25, 30),
+  menu("custom", "Custom cut", "Corte personalizado", 30, 45),
+  menu("eyebrows", "Eyebrows trimming", "Perfilado de cejas", 10, 10),
+  menu("head-shave", "Head shave", "Afeitado de cabeza", 30, 30),
+  menu("scissor", "Scissor cut", "Corte a tijera", 30, 30),
+  menu("seniors", "Seniors cuts", "Corte para adultos mayores", 25, 25),
+];
 
 // PENDING: Tuesday/Wednesday promotions — add here once confirmed, e.g. { days: "Tue & Wed", text: "...", price: "$..." }
 export const PROMOTIONS: { days: string; text: string; price: string }[] = [];
