@@ -1,30 +1,31 @@
 // Single source of truth for Next Cut business info.
 // Update values here when the client confirms them; items marked PENDING are awaiting confirmation.
-import b0027 from "@/assets/barbers/b0027.jpg.asset.json";
-import b0030 from "@/assets/barbers/b0030.jpg.asset.json";
-import b0033 from "@/assets/barbers/b0033.jpg.asset.json";
-import b0036 from "@/assets/barbers/b0036.jpg.asset.json";
-import b0039 from "@/assets/barbers/b0039.jpg.asset.json";
-import b0042 from "@/assets/barbers/b0042.jpg.asset.json";
-import b0045 from "@/assets/barbers/b0045.jpg.asset.json";
-import b0048 from "@/assets/barbers/b0048.jpg.asset.json";
-import b0051 from "@/assets/barbers/b0051.jpg.asset.json";
-import b0053 from "@/assets/barbers/b0053.jpg.asset.json";
-import mello from "@/assets/barbers/mello.jpg.asset.json";
-import c45 from "@/assets/gallery/cut-0045.jpg.asset.json";
-import c48 from "@/assets/gallery/cut-0048.jpg.asset.json";
-import c49 from "@/assets/gallery/cut-0049.jpg.asset.json";
-import c62 from "@/assets/gallery/cut-0062.jpg.asset.json";
-import c63 from "@/assets/gallery/cut-0063.jpg.asset.json";
-import c64 from "@/assets/gallery/cut-0064.jpg.asset.json";
-import c65 from "@/assets/gallery/cut-0065.jpg.asset.json";
-import c66 from "@/assets/gallery/cut-0066.jpg.asset.json";
-import c67 from "@/assets/gallery/cut-0067.jpg.asset.json";
-import shop0050 from "@/assets/gallery/shop-0050.jpg.asset.json";
-import shop0047 from "@/assets/gallery/shop-0047.jpg.asset.json";
-import shop0043 from "@/assets/gallery/shop-0043.jpg.asset.json";
-import shop0044 from "@/assets/gallery/shop-0044.jpg.asset.json";
-import shop0046 from "@/assets/gallery/shop-0046.jpg.asset.json";
+// Photos live in public/photos/ so the site works on any host (Lovable, Vercel, custom domain).
+const b0027 = "/photos/barber-0027.jpg";
+const b0030 = "/photos/barber-0030.jpg";
+const b0033 = "/photos/barber-0033.jpg";
+const b0036 = "/photos/barber-0036.jpg";
+const b0039 = "/photos/barber-0039.jpg";
+const b0042 = "/photos/barber-0042.jpg";
+const b0045 = "/photos/barber-0045.jpg";
+const b0048 = "/photos/barber-0048.jpg";
+const b0051 = "/photos/barber-0051.jpg";
+const b0053 = "/photos/barber-0053.jpg";
+const mello = "/photos/mello.jpg";
+const c45 = "/photos/cut-0045.jpg";
+const c48 = "/photos/cut-0048.jpg";
+const c49 = "/photos/cut-0049.jpg";
+const c62 = "/photos/cut-0062.jpg";
+const c63 = "/photos/cut-0063.jpg";
+const c64 = "/photos/cut-0064.jpg";
+const c65 = "/photos/cut-0065.jpg";
+const c66 = "/photos/cut-0066.jpg";
+const c67 = "/photos/cut-0067.jpg";
+const shop0050 = "/photos/shop-0050.jpg";
+const shop0047 = "/photos/shop-0047.jpg";
+const shop0043 = "/photos/shop-0043.jpg";
+const shop0044 = "/photos/shop-0044.jpg";
+const shop0046 = "/photos/shop-0046.jpg";
 
 const WP = "https://nextcutpro.com/wp-content/uploads/2026/05/";
 
@@ -69,32 +70,32 @@ export const PROMOTIONS: { days: string; text: string; price: string }[] = [];
 // specialties: leave empty until the client confirms what each barber is known for.
 export const BARBERS: { name: string; photo: string; specialties: string[]; bookingUrl?: string }[] = [
   { name: "Alex", photo: WP + "Alex.webp", specialties: [] },
-  { name: "Anyel", photo: b0045.url, specialties: [] },
-  { name: "Addis", photo: b0042.url, specialties: [] },
-  { name: "Mello", photo: mello.url, specialties: [] },
-  { name: "Abel", photo: b0033.url, specialties: [] },
-  { name: "Edgar", photo: b0048.url, specialties: [] },
-  { name: "Deyker", photo: b0027.url, specialties: [] },
-  { name: "Jordan", photo: b0030.url, specialties: [] },
-  { name: "Oscar", photo: b0036.url, specialties: [] },
-  { name: "Emílio", photo: b0039.url, specialties: [] },
-  { name: "Jefferson", photo: b0051.url, specialties: [] },
-  { name: "Zapata", photo: b0053.url, specialties: [] },
+  { name: "Anyel", photo: b0045, specialties: [] },
+  { name: "Addis", photo: b0042, specialties: [] },
+  { name: "Mello", photo: mello, specialties: [] },
+  { name: "Abel", photo: b0033, specialties: [] },
+  { name: "Edgar", photo: b0048, specialties: [] },
+  { name: "Deyker", photo: b0027, specialties: [] },
+  { name: "Jordan", photo: b0030, specialties: [] },
+  { name: "Oscar", photo: b0036, specialties: [] },
+  { name: "Emílio", photo: b0039, specialties: [] },
+  { name: "Jefferson", photo: b0051, specialties: [] },
+  { name: "Zapata", photo: b0053, specialties: [] },
 ];
 
 export const GALLERY: { src: string; alt: string; tag: string }[] = [
-  { src: shop0046.url, alt: "Textured haircut with a fade and sharply shaped beard at Next Cut", tag: "Fade + Beard" },
-  { src: shop0043.url, alt: "Kid's haircut with a textured fringe and skin fade at Next Cut", tag: "Kids Cut" },
-  { src: shop0047.url, alt: "Kid's fade with two shaved design lines at Next Cut", tag: "Kids + Design" },
-  { src: shop0044.url, alt: "Next Cut Barbershop interior with barbers serving customers", tag: "Inside Next Cut" },
-  { src: shop0050.url, alt: "Barbers working on haircuts and beard grooming inside Next Cut", tag: "In the shop" },
-  { src: c63.url, alt: "Skin fade with full sculpted beard", tag: "Fade + Beard" },
-  { src: c45.url, alt: "Kid's low fade with freehand design", tag: "Kids + Design" },
-  { src: c48.url, alt: "Fresh haircut at Next Cut", tag: "Haircut" },
-  { src: c49.url, alt: "Fresh haircut at Next Cut", tag: "Haircut" },
-  { src: c62.url, alt: "Fresh haircut at Next Cut", tag: "Haircut" },
-  { src: c64.url, alt: "Fresh haircut at Next Cut", tag: "Haircut" },
-  { src: c65.url, alt: "Fresh haircut at Next Cut", tag: "Haircut" },
-  { src: c66.url, alt: "Fresh haircut at Next Cut", tag: "Haircut" },
-  { src: c67.url, alt: "Fresh haircut at Next Cut", tag: "Haircut" },
+  { src: shop0046, alt: "Textured haircut with a fade and sharply shaped beard at Next Cut", tag: "Fade + Beard" },
+  { src: shop0043, alt: "Kid's haircut with a textured fringe and skin fade at Next Cut", tag: "Kids Cut" },
+  { src: shop0047, alt: "Kid's fade with two shaved design lines at Next Cut", tag: "Kids + Design" },
+  { src: shop0044, alt: "Next Cut Barbershop interior with barbers serving customers", tag: "Inside Next Cut" },
+  { src: shop0050, alt: "Barbers working on haircuts and beard grooming inside Next Cut", tag: "In the shop" },
+  { src: c63, alt: "Skin fade with full sculpted beard", tag: "Fade + Beard" },
+  { src: c45, alt: "Kid's low fade with freehand design", tag: "Kids + Design" },
+  { src: c48, alt: "Fresh haircut at Next Cut", tag: "Haircut" },
+  { src: c49, alt: "Fresh haircut at Next Cut", tag: "Haircut" },
+  { src: c62, alt: "Fresh haircut at Next Cut", tag: "Haircut" },
+  { src: c64, alt: "Fresh haircut at Next Cut", tag: "Haircut" },
+  { src: c65, alt: "Fresh haircut at Next Cut", tag: "Haircut" },
+  { src: c66, alt: "Fresh haircut at Next Cut", tag: "Haircut" },
+  { src: c67, alt: "Fresh haircut at Next Cut", tag: "Haircut" },
 ];
