@@ -119,6 +119,7 @@ function Index() {
           <nav className="flex flex-col border-t px-5 py-3 lg:hidden" aria-label="Mobile">
             {nav.map(([l, h]) => <a key={h} href={h} onClick={() => setOpen(false)} className="py-3 text-sm font-semibold tracking-wider uppercase">{l}</a>)}
             <a href={B.phoneHref} className="flex items-center gap-2 py-3 text-sm font-semibold"><Phone className="size-4 text-primary" />{B.phoneDisplay}</a>
+            <div className="border-t py-3"><Socials /></div>
           </nav>
         )}
       </header>
@@ -230,6 +231,7 @@ function Index() {
           <div>
             <Head tag="Our work" title="Gallery" sub="Real cuts from our chairs. Tap a photo to view it." />
             <a href={B.instagram} {...ext} className="btn-outline mt-6"><Instagram className="size-4" />More on Instagram</a>
+            <a href={B.tiktok} {...ext} className="btn-outline mt-3"><Music2 className="size-4" />Follow on TikTok</a>
           </div>
           <div>
             <div ref={track} className="flex snap-x gap-4 overflow-x-auto pb-2 [scrollbar-width:none]">
