@@ -1,3 +1,4 @@
 - [x] Site audit improvements + AI cut finder
 - [x] WhatsApp/Instagram/TikTok links
+- [x] Add five new gallery photos and highlight TikTok; verify Instagram destination and mobile photo viewing
 - [ ] Confirm prices, Tue/Wed promos, Sunday hours, Facebook URL, barber specialties (waiting on client)

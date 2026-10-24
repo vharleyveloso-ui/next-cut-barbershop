@@ -20,6 +20,11 @@ import c64 from "@/assets/gallery/cut-0064.jpg.asset.json";
 import c65 from "@/assets/gallery/cut-0065.jpg.asset.json";
 import c66 from "@/assets/gallery/cut-0066.jpg.asset.json";
 import c67 from "@/assets/gallery/cut-0067.jpg.asset.json";
+import shop0050 from "@/assets/gallery/shop-0050.jpg.asset.json";
+import shop0047 from "@/assets/gallery/shop-0047.jpg.asset.json";
+import shop0043 from "@/assets/gallery/shop-0043.jpg.asset.json";
+import shop0044 from "@/assets/gallery/shop-0044.jpg.asset.json";
+import shop0046 from "@/assets/gallery/shop-0046.jpg.asset.json";
 
 const WP = "https://nextcutpro.com/wp-content/uploads/2026/05/";
 
@@ -78,6 +83,11 @@ export const BARBERS: { name: string; photo: string; specialties: string[]; book
 ];
 
 export const GALLERY: { src: string; alt: string; tag: string }[] = [
+  { src: shop0046.url, alt: "Textured haircut with a fade and sharply shaped beard at Next Cut", tag: "Fade + Beard" },
+  { src: shop0043.url, alt: "Kid's haircut with a textured fringe and skin fade at Next Cut", tag: "Kids Cut" },
+  { src: shop0047.url, alt: "Kid's fade with two shaved design lines at Next Cut", tag: "Kids + Design" },
+  { src: shop0044.url, alt: "Next Cut Barbershop interior with barbers serving customers", tag: "Inside Next Cut" },
+  { src: shop0050.url, alt: "Barbers working on haircuts and beard grooming inside Next Cut", tag: "In the shop" },
   { src: c63.url, alt: "Skin fade with full sculpted beard", tag: "Fade + Beard" },
   { src: c45.url, alt: "Kid's low fade with freehand design", tag: "Kids + Design" },
   { src: c48.url, alt: "Fresh haircut at Next Cut", tag: "Haircut" },
