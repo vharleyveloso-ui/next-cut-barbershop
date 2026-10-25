@@ -63,7 +63,7 @@
   * { border-color: var(--color-border); }
   html { scroll-behavior: smooth; }
   body { overflow-x: clip; background-color: var(--color-background); color: var(--color-foreground); font-family: var(--font-sans); }
-  .font-display { font-family: var(--font-display); font-weight: 800; text-transform: uppercase; letter-spacing: .01em; }
+  .font-display { font-family: var(--font-display); font-weight: 800; text-transform: uppercase; letter-spacing: 0; overflow-wrap: anywhere; }
   .font-script { font-family: var(--font-script); font-weight: 400; font-style: normal; text-transform: none; letter-spacing: 0; }
 }
 
@@ -72,6 +72,13 @@
 @keyframes reveal-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: no-preference) {
   .reveal { animation: reveal-in .5s ease-out both; }
+  .team-in-view .barber-card { animation: barber-arrive .65s ease-out; }
+  .team-in-view .barber-card:nth-child(3n + 2) { animation-delay: .08s; }
+  .team-in-view .barber-card:nth-child(3n) { animation-delay: .16s; }
+}
+@keyframes barber-arrive {
+  from { transform: translateY(18px); border-color: var(--primary); }
+  to { transform: none; border-color: var(--border); }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
