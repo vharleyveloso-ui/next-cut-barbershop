@@ -33,7 +33,8 @@ Reply with ONLY JSON: {"serviceId": string, "barber": string|null, "reason": str
       });
       const text = await result.text;
       const parsed = JSON.parse(text.slice(text.indexOf("{"), text.lastIndexOf("}") + 1));
-      const service = SERVICES.find((s) => s.id === parsed.serviceId) ?? SERVICES[0];
+      const service = SERVICES.find((s) => s.id === parsed.serviceId);
+      if (!service) return { ok: false, error: "Couldn't get a recommendation. Please try again." };
       const barber = BARBERS.find((b) => b.name === parsed.barber && b.specialties.length)?.name ?? null;
       return { ok: true, serviceId: service.id, barber, reason: String(parsed.reason ?? "").slice(0, 300) };
     } catch (e: any) {

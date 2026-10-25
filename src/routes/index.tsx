@@ -129,7 +129,7 @@ function Page() {
       <header className="sticky top-0 z-50 border-b bg-background/90 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4">
           <Logo />
-          <nav className="hidden gap-7 lg:flex" aria-label={t("Main")}>
+          <nav className="hidden gap-5 xl:flex" aria-label={t("Main")}>
             {nav.map(([l, h]) => <a key={h} href={h} className="pb-1 text-xs font-semibold tracking-wider text-muted-foreground uppercase transition hover:text-primary">{t(l)}</a>)}
           </nav>
           <div className="flex items-center gap-2 sm:gap-4">
@@ -138,11 +138,11 @@ function Page() {
             </div>
             <a href={B.phoneHref} className="hidden items-center gap-2 text-sm font-semibold md:flex"><Phone className="size-4" />{B.phoneDisplay}</a>
             <a href={B.bookingUrl} {...ext} className="btn-red hidden sm:inline-flex">{t("Book now")} <ArrowRight className="size-4" /></a>
-            <Button variant="ghost" className="grid size-11 place-items-center lg:hidden" onClick={() => setOpen(!open)} aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open}>{open ? <X /> : <Menu />}</Button>
+            <Button variant="ghost" className="grid size-11 place-items-center xl:hidden" onClick={() => setOpen(!open)} aria-label={t(open ? "Close menu" : "Open menu")} aria-expanded={open}>{open ? <X /> : <Menu />}</Button>
           </div>
         </div>
         {open && (
-          <nav className="flex flex-col border-t px-5 py-3 lg:hidden" aria-label={t("Mobile")}>
+          <nav className="flex flex-col border-t px-5 py-3 xl:hidden" aria-label={t("Mobile")}>
             {nav.map(([l, h]) => <a key={h} href={h} onClick={() => setOpen(false)} className="py-3 text-sm font-semibold tracking-wider uppercase">{t(l)}</a>)}
             <a href={B.phoneHref} className="flex items-center gap-2 py-3 text-sm font-semibold"><Phone className="size-4 text-primary" />{B.phoneDisplay}</a>
             <div className="border-t py-3"><Socials /></div>
@@ -234,7 +234,7 @@ function Page() {
                 <img src={b.photo} alt={`${b.name}, ${t("barber at Next Cut")}`} width={400} height={500} loading="lazy" className="aspect-[4/5] w-full rounded-sm bg-muted object-cover object-top" />
                 <div className="mt-3 font-semibold">{b.name}</div>
                 <div className="text-[0.65rem] text-muted-foreground uppercase">{t("Barber")}</div>
-                <a href={b.bookingUrl ?? B.bookingUrl} {...ext} className="btn-outline mt-3 w-full px-2 py-2.5 text-[0.62rem]">{t("Book with")} {b.name}</a>
+                <a href={b.bookingUrl ?? B.bookingUrl} {...ext} className="btn-outline mt-3 min-h-11 w-full flex-wrap gap-1 px-1 py-2.5 text-center text-[0.62rem] tracking-normal">{t("Book with")} {b.name}</a>
               </div>
             ))}
           </div>
@@ -252,7 +252,7 @@ function Page() {
           <div>
             <div ref={track} className="flex snap-x gap-4 overflow-x-auto pb-2 [scrollbar-width:none]">
               {GALLERY.map((g, i) => (
-                <Button variant="ghost" key={g.src} onClick={() => setLb(i)} aria-label={`${t("View photo")}: ${t(g.alt)}`} className="card-glow relative w-56 shrink-0 snap-start overflow-hidden text-left sm:w-60">
+                <Button variant="ghost" key={g.src} onClick={() => setLb(i)} aria-label={`${t("View photo")}: ${t(g.alt)}`} className="card-glow relative h-auto w-56 shrink-0 snap-start overflow-hidden whitespace-normal p-0 text-left sm:w-60">
                   <img src={g.src} alt={t(g.alt)} width={480} height={600} loading="lazy" className="aspect-[4/5] w-full bg-muted object-cover" />
                   <div className="absolute inset-0 bg-bottom-overlay" />
                   <div className="absolute bottom-3 left-3 text-xs font-semibold tracking-wider uppercase">{t(g.tag)}</div>
