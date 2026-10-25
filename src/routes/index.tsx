@@ -1,12 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
   ArrowRight, Phone, Star, Scissors, Smile, Package, CalendarCheck, Users, DoorOpen, Baby, ShieldCheck,
-  Instagram, Facebook, MapPin, Clock, Music2, ChevronLeft, ChevronRight, Menu, X, Navigation, MessageCircle,
+  Instagram, Facebook, MapPin, Clock, Music2, ChevronLeft, ChevronRight, Menu, X, Navigation, MessageCircle, ReceiptText,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { BUSINESS, BARBERS, GALLERY, PROMOTIONS, fullAddress } from "@/lib/business";
 import { CutFinder } from "@/components/CutFinder";
 import { ServiceMenu } from "@/components/ServiceMenu";
+import { PriceList } from "@/components/PriceList";
 import { LanguageProvider, useLanguage } from "@/lib/language";
 import { Button } from "@/components/ui/button";
 
@@ -109,6 +110,7 @@ function Page() {
   const { t, language, setLanguage } = useLanguage();
   const [open, setOpen] = useState(false);
   const [lb, setLb] = useState<number | null>(null);
+  const [pricesOpen, setPricesOpen] = useState(false);
   const track = useRef<HTMLDivElement>(null);
   const scroll = (d: number) => track.current?.scrollBy({ left: d * 280, behavior: "smooth" });
   const team = useRef<HTMLElement>(null);
@@ -136,6 +138,7 @@ function Page() {
             <div role="group" aria-label={t("Language / Idioma")} className="flex shrink-0 gap-0.5">
               {(["en", "es"] as const).map((code) => <Button key={code} variant={language === code ? "default" : "ghost"} size="sm" onClick={() => setLanguage(code)} aria-pressed={language === code} aria-label={code === "en" ? "English" : "Español"} className="h-10 px-2">{code.toUpperCase()}</Button>)}
             </div>
+            <Button variant="outline" className="btn-outline hidden lg:inline-flex" onClick={() => setPricesOpen(true)}><ReceiptText className="size-4" />{t("Prices")}</Button>
             <a href={B.phoneHref} className="hidden items-center gap-2 text-sm font-semibold md:flex"><Phone className="size-4" />{B.phoneDisplay}</a>
             <a href={B.bookingUrl} {...ext} className="btn-red hidden sm:inline-flex">{t("Book now")} <ArrowRight className="size-4" /></a>
             <Button variant="ghost" className="grid size-11 place-items-center xl:hidden" onClick={() => setOpen(!open)} aria-label={t(open ? "Close menu" : "Open menu")} aria-expanded={open}>{open ? <X /> : <Menu />}</Button>
@@ -144,6 +147,7 @@ function Page() {
         {open && (
           <nav className="flex flex-col border-t px-5 py-3 xl:hidden" aria-label={t("Mobile")}>
             {nav.map(([l, h]) => <a key={h} href={h} onClick={() => setOpen(false)} className="py-3 text-sm font-semibold tracking-wider uppercase">{t(l)}</a>)}
+            <button type="button" onClick={() => { setOpen(false); setPricesOpen(true); }} className="flex items-center gap-2 py-3 text-left text-sm font-semibold tracking-wider uppercase"><ReceiptText className="size-4 text-primary" />{t("Prices")}</button>
             <a href={B.phoneHref} className="flex items-center gap-2 py-3 text-sm font-semibold"><Phone className="size-4 text-primary" />{B.phoneDisplay}</a>
             <div className="border-t py-3"><Socials /></div>
           </nav>
@@ -323,8 +327,9 @@ function Page() {
       </footer>
 
       {/* Mobile sticky actions */}
-      <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-[1fr_auto_auto] gap-2 border-t bg-background/95 p-3 backdrop-blur lg:hidden">
+      <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-[1fr_auto_auto_auto] gap-2 border-t bg-background/95 p-3 backdrop-blur lg:hidden">
         <a href={B.bookingUrl} {...ext} className="btn-red justify-center">{t("Book now")} <ArrowRight className="size-4" /></a>
+        <Button variant="outline" className="btn-outline px-3.5" onClick={() => setPricesOpen(true)} aria-label={t("All prices")}><ReceiptText className="size-4" /></Button>
         <a href={B.mapsUrl} {...ext} aria-label={t("Get directions")} className="btn-outline px-3.5"><Navigation className="size-4" /></a>
         <a href={B.phoneHref} aria-label={`${t("Call")} ${B.phoneDisplay}`} className="btn-outline px-3.5"><Phone className="size-4" /></a>
       </div>
@@ -333,6 +338,7 @@ function Page() {
           <MessageCircle className="size-5" />
         </a>
       )}
+      <PriceList open={pricesOpen} onClose={() => setPricesOpen(false)} />
     </div>
   );
 }

@@ -4,4 +4,6 @@
 - [x] Update confirmed menu and durations; add price/example access and verify menu rules
 - [x] Add complete English/Spanish language selection
 - [x] Add safe on-view barber animation and verify phone layouts
+- [x] Add a button that opens the full price list (navbar, mobile menu, mobile action bar)
+- [x] Fix the blank-screen runtime error on the live site
 - [ ] Confirm Tue/Wed promos, Sunday hours, Facebook URL, barber specialties (waiting on client)
