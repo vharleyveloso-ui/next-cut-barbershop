@@ -50,10 +50,10 @@ function Logo() {
   const { t } = useLanguage();
   return (
     <a href="#home" className="flex flex-col leading-none" aria-label={t("Next Cut Barbershop home")}>
-      <span className="font-display whitespace-nowrap text-2xl tracking-normal">
+      <span className="font-display whitespace-nowrap text-base tracking-normal sm:text-2xl">
         NEXT<Star className="mx-0.5 inline size-4 -translate-y-0.5 fill-primary text-primary" />CUT
       </span>
-      <span className="mt-1 text-[0.55rem] tracking-[0.6em] text-muted-foreground">BARBERSHOP</span>
+      <span className="mt-1 text-[0.5rem] tracking-[0.3em] text-muted-foreground sm:text-[0.55rem] sm:tracking-[0.6em]">BARBERSHOP</span>
     </a>
   );
 }
