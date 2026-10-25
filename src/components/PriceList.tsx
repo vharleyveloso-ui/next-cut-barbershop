@@ -40,7 +40,7 @@ export function PriceList({ open, onClose }: { open: boolean; onClose: () => voi
             <span className="tagline">{t("Full price list")}</span>
             <h3 id="price-list-title" className="mt-2 font-display text-xl sm:text-2xl">{t("All prices")}</h3>
           </div>
-          <Button ref={closeRef as never} variant="ghost" onClick={onClose} aria-label={t("Close price list")} className="btn-outline shrink-0 p-2">
+          <Button ref={closeRef} variant="ghost" onClick={onClose} aria-label={t("Close price list")} className="btn-outline shrink-0 p-2">
             <X className="size-5" />
           </Button>
         </div>

@@ -1,12 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
   ArrowRight, Phone, Star, Scissors, Smile, Package, CalendarCheck, Users, DoorOpen, Baby, ShieldCheck,
-  Instagram, Facebook, MapPin, Clock, Music2, ChevronLeft, ChevronRight, Menu, X, Navigation, MessageCircle,
+  Instagram, Facebook, MapPin, Clock, Music2, ChevronLeft, ChevronRight, Menu, X, Navigation, MessageCircle, ReceiptText,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { BUSINESS, BARBERS, GALLERY, PROMOTIONS, fullAddress } from "@/lib/business";
 import { CutFinder } from "@/components/CutFinder";
 import { ServiceMenu } from "@/components/ServiceMenu";
+import { PriceList } from "@/components/PriceList";
 import { LanguageProvider, useLanguage } from "@/lib/language";
 import { Button } from "@/components/ui/button";
 
@@ -109,6 +110,7 @@ function Page() {
   const { t, language, setLanguage } = useLanguage();
   const [open, setOpen] = useState(false);
   const [lb, setLb] = useState<number | null>(null);
+  const [pricesOpen, setPricesOpen] = useState(false);
   const track = useRef<HTMLDivElement>(null);
   const scroll = (d: number) => track.current?.scrollBy({ left: d * 280, behavior: "smooth" });
   const team = useRef<HTMLElement>(null);
