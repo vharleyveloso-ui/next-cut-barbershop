@@ -338,6 +338,7 @@ function Page() {
           <MessageCircle className="size-5" />
         </a>
       )}
+      <PriceList open={pricesOpen} onClose={() => setPricesOpen(false)} />
     </div>
   );
 }
