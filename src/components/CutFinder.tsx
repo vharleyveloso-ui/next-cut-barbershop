@@ -3,8 +3,11 @@ import { useServerFn } from "@tanstack/react-start";
 import { ArrowRight, Loader2, Wand2 } from "lucide-react";
 import { recommendCut, type Recommendation } from "@/lib/recommend.functions";
 import { BUSINESS, SERVICES } from "@/lib/business";
+import { useLanguage } from "@/lib/language";
+import { Button } from "@/components/ui/button";
 
 export function CutFinder() {
+  const { t, language } = useLanguage();
   const run = useServerFn(recommendCut);
   const [text, setText] = useState("");
   const [loading, setLoading] = useState(false);
@@ -16,7 +19,7 @@ export function CutFinder() {
     setLoading(true);
     setRes(null);
     try {
-      setRes(await run({ data: { description: text } }));
+      setRes(await run({ data: { description: text, language } }));
     } catch {
       setRes({ ok: false, error: "Couldn't get a recommendation. Please try again." });
     } finally {
@@ -25,32 +28,33 @@ export function CutFinder() {
   }
 
   const service = res?.ok ? SERVICES.find((s) => s.id === res.serviceId) : null;
+  const name = service ? (language === "es" ? service.nameEs : service.name) : "";
 
   return (
     <div className="grid gap-8 lg:grid-cols-2">
       <form onSubmit={submit} className="card-glow p-5 hover:transform-none">
-        <label htmlFor="cut-desc" className="text-sm font-semibold">Describe the cut you want</label>
+        <label htmlFor="cut-desc" className="text-sm font-semibold">{t("Describe the cut you want")}</label>
         <textarea
           id="cut-desc" value={text} onChange={(e) => setText(e.target.value)} maxLength={600} rows={4}
-          placeholder="e.g. Low skin fade, a little longer on top, and clean up my beard line"
+          placeholder={t("e.g. Low skin fade, a little longer on top, and clean up my beard line")}
           className="mt-3 w-full resize-none rounded-sm border bg-background p-3 text-sm placeholder:text-muted-foreground focus:border-primary focus:outline-none"
         />
-        <button type="submit" disabled={loading || text.trim().length < 5} className="btn-red mt-4 disabled:opacity-50">
-          {loading ? <Loader2 className="size-4 animate-spin" /> : <Wand2 className="size-4" />} Get my recommendation
-        </button>
+        <Button type="submit" disabled={loading || text.trim().length < 5} className="btn-red mt-4 h-auto whitespace-normal disabled:opacity-50">
+          {loading ? <Loader2 className="size-4 animate-spin" /> : <Wand2 className="size-4" />} {t("Get my recommendation")}
+        </Button>
       </form>
       <div aria-live="polite" className="flex flex-col justify-center">
-        {!res && !loading && <p className="text-muted-foreground">Tell us what you're after and we'll suggest the right service to book.</p>}
-        {loading && <p className="text-muted-foreground">Thinking about your cut…</p>}
-        {res && !res.ok && <p className="text-primary">{res.error}</p>}
+        {!res && !loading && <p className="text-muted-foreground">{t("Tell us what you're after and we'll suggest the right service to book.")}</p>}
+        {loading && <p className="text-muted-foreground">{t("Thinking about your cut…")}</p>}
+        {res && !res.ok && <p className="text-primary">{t(res.error)}</p>}
         {res?.ok && service && (
           <div className="rounded-md border border-primary/60 bg-card p-6">
-            <span className="tagline">We recommend</span>
-            <div className="mt-3 font-display text-2xl">{service.name}</div>
-            {service.price && <div className="text-sm font-semibold text-primary">{service.price}</div>}
+            <span className="tagline">{t("We recommend")}</span>
+            <div className="mt-3 font-display text-2xl">{name}</div>
+            <div className="text-sm font-semibold text-primary">{t(service.price)} · {service.minutes} min</div>
             <p className="mt-3 text-sm text-muted-foreground">{res.reason}</p>
-            <p className="mt-3 text-sm">Barber: <span className="font-semibold">{res.barber ?? "Any available barber"}</span></p>
-            <a href={BUSINESS.bookingUrl} target="_blank" rel="noreferrer" className="btn-red mt-5">Book {service.name} <ArrowRight className="size-4" /></a>
+            <p className="mt-3 text-sm">{t("Barber")}: <span className="font-semibold">{res.barber ?? t("Any available barber")}</span></p>
+            <a href={BUSINESS.bookingUrl} target="_blank" rel="noreferrer" className="btn-red mt-5">{t("Book")} {name} <ArrowRight className="size-4" /></a>
           </div>
         )}
       </div>

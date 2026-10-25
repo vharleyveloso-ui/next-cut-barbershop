@@ -7,7 +7,7 @@ export type Recommendation =
   | { ok: false; error: string };
 
 export const recommendCut = createServerFn({ method: "POST" })
-  .inputValidator((d) => z.object({ description: z.string().trim().min(5).max(600) }).parse(d))
+  .inputValidator((d) => z.object({ description: z.string().trim().min(5).max(600), language: z.enum(["en", "es"]).default("en") }).parse(d))
   .handler(async ({ data }): Promise<Recommendation> => {
     const key = process.env["LOVABLE_API_KEY"];
     if (!key) return { ok: false, error: "The style assistant isn't configured yet." };
@@ -19,7 +19,7 @@ export const recommendCut = createServerFn({ method: "POST" })
       headers: { "Lovable-API-Key": key, "X-Lovable-AIG-SDK": "vercel-ai-sdk" },
     });
     const barbers = BARBERS.map((b) => `${b.name}: ${b.specialties.length ? b.specialties.join(", ") : "no specialties listed"}`).join("\n");
-    const services = SERVICES.map((s) => `${s.id}: ${s.name} (${s.note})`).join("\n");
+    const services = SERVICES.map((s) => `${s.id}: ${s.name} (${s.price}; ${s.note})`).join("\n");
     try {
       const result = streamText({
         model: openai.responses("openai/gpt-6-astra"),
@@ -27,7 +27,7 @@ export const recommendCut = createServerFn({ method: "POST" })
         system: `You are the booking helper for Next Cut Barbershop in Orlando. Pick the single best service for the client's described haircut.
 Services:\n${services}\nBarbers and confirmed specialties:\n${barbers}
 Only recommend a barber whose listed specialties clearly match; otherwise barber must be null. Never invent specialties.
-Reply with ONLY JSON: {"serviceId": string, "barber": string|null, "reason": string (max 2 short sentences, in the client's language)}`,
+Reply with ONLY JSON: {"serviceId": string, "barber": string|null, "reason": string (max 2 short sentences, in ${data.language === "es" ? "Spanish" : "English"})}`,
         prompt: data.description,
         providerOptions: { openai: { forceReasoning: true, reasoningEffort: "low", reasoningSummary: "auto", store: false, include: ["reasoning.encrypted_content"] } },
       });
