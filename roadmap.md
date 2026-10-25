@@ -1,7 +1,7 @@
 - [x] Site audit improvements + AI cut finder
 - [x] WhatsApp/Instagram/TikTok links
 - [x] Add five new gallery photos and highlight TikTok; verify Instagram destination and mobile photo viewing
-- [ ] Update confirmed menu and durations; add price/example access and verify menu rules
-- [ ] Add complete English/Spanish language selection
-- [ ] Add safe on-view barber animation and verify phone layouts
+- [x] Update confirmed menu and durations; add price/example access and verify menu rules
+- [x] Add complete English/Spanish language selection
+- [x] Add safe on-view barber animation and verify phone layouts
 - [ ] Confirm Tue/Wed promos, Sunday hours, Facebook URL, barber specialties (waiting on client)
