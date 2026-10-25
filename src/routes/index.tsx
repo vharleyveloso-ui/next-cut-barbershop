@@ -41,7 +41,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const nav = [
+const nav: [string, string][] = [
   ["Home", "#home"], ["Services", "#services"], ["Barbers", "#barbers"],
   ["Gallery", "#gallery"], ["Reviews", "#reviews"], ["Location", "#location"],
 ];
@@ -50,7 +50,7 @@ function Logo() {
   const { t } = useLanguage();
   return (
     <a href="#home" className="flex flex-col leading-none" aria-label={t("Next Cut Barbershop home")}>
-      <span className="font-display text-2xl tracking-tight">
+      <span className="font-display whitespace-nowrap text-2xl tracking-normal">
         NEXT<Star className="mx-0.5 inline size-4 -translate-y-0.5 fill-primary text-primary" />CUT
       </span>
       <span className="mt-1 text-[0.55rem] tracking-[0.6em] text-muted-foreground">BARBERSHOP</span>
