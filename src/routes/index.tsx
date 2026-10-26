@@ -232,13 +232,16 @@ function Page() {
       <section ref={team} id="barbers" className={`scroll-mt-20 border-b ${teamVisible ? "team-in-view" : ""}`}>
         <div className="mx-auto max-w-7xl px-5 py-20">
           <Head tag="Meet the barbers" title="Our team" sub="Different styles. Same standard. Choose your barber in the booking app." />
-          <div className="mt-10 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-6">
+          <div className="mt-10 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
             {BARBERS.map((b) => (
-              <div key={b.name} className="barber-card card-glow flex flex-col overflow-hidden p-2.5 sm:p-3">
-                <img src={b.photo} alt={`${b.name}, ${t("barber at Next Cut")}`} width={400} height={500} loading="lazy" className="aspect-[4/5] w-full rounded-sm bg-muted object-cover object-top" />
-                <div className="mt-3 font-semibold">{b.name}</div>
-                <div className="text-[0.65rem] text-muted-foreground uppercase">{t("Barber")}</div>
-                <a href={b.bookingUrl ?? B.bookingUrl} {...ext} className="btn-outline mt-3 min-h-11 w-full flex-wrap gap-1 px-1 py-2.5 text-center text-[0.62rem] tracking-normal">{t("Book with")} {b.name}</a>
+              <div key={b.name} className="barber-card card-glow flex flex-col items-center overflow-hidden p-4 text-center sm:p-5">
+                <img src={b.photo} alt={`${b.name}, ${t("barber at Next Cut")}`} width={240} height={240} loading="lazy" className="size-24 rounded-full border-2 border-border bg-muted object-cover object-top sm:size-28" />
+                <div className="mt-3 font-display text-sm sm:text-base">{b.name}</div>
+                <div className="mt-1.5 flex items-center gap-0.5" role="img" aria-label={t("5-star rated barber")}>
+                  {[0, 1, 2, 3, 4].map((s) => <Star key={s} className="size-3.5 fill-star text-star" />)}
+                </div>
+                <span className="mt-2.5 rounded-full bg-available px-3 py-1 text-[0.65rem] font-semibold text-available-foreground">{t("Walk-ins welcome")}</span>
+                <a href={b.bookingUrl ?? B.bookingUrl} {...ext} className="btn-outline mt-3.5 min-h-11 w-full flex-wrap gap-1 px-1 py-2.5 text-center text-[0.62rem] tracking-normal">{t("Book with")} {b.name}</a>
               </div>
             ))}
           </div>
