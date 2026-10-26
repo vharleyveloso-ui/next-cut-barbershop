@@ -7,6 +7,7 @@ const spanish: Record<string, string> = {
   "Next Cut Barbershop is Orlando's spot for fades, scissor cuts, beard work and kids cuts. Book online in a minute or walk right in.": "Next Cut Barbershop en Orlando: degradados, cortes a tijera, cuidado de barba y cortes para niños. Reserva en línea o ven sin cita.",
   "Services & prices": "Servicios y precios", "What we do": "Nuestros servicios", "See full menu & book": "Ver menú y reservar", "Price varies": "Precio variable", "1 hr": "1 hora",
   "Cut examples": "Ejemplos de cortes", "View cut examples": "Ver ejemplos de cortes", "Service": "Servicio", "Duration": "Duración", "Price": "Precio",
+  "minutes": "minutos", "5-star rated barber": "Barbero con 5 estrellas", "Top rated": "Mejor valorado",
   "Prices": "Precios", "All prices": "Todos los precios", "Full price list": "Lista completa de precios", "Close price list": "Cerrar lista de precios", "See cut examples": "Ver ejemplos de cortes",
   "Not sure what to book?": "¿No sabes qué reservar?", "Find your cut": "Encuentra tu corte",
   "Describe the look you want and our style assistant suggests the right service.": "Describe el estilo que buscas y nuestro asistente te recomendará un servicio.",
