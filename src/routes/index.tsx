@@ -330,11 +330,11 @@ function Page() {
       </footer>
 
       {/* Mobile sticky actions */}
-      <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-[1fr_auto_auto_auto] gap-2 border-t bg-background/95 p-3 backdrop-blur lg:hidden">
-        <a href={B.bookingUrl} {...ext} className="btn-red justify-center">{t("Book now")} <ArrowRight className="size-4" /></a>
-        <Button variant="outline" className="btn-outline px-3.5" onClick={() => setPricesOpen(true)} aria-label={t("All prices")}><ReceiptText className="size-4" /></Button>
-        <a href={B.mapsUrl} {...ext} aria-label={t("Get directions")} className="btn-outline px-3.5"><Navigation className="size-4" /></a>
-        <a href={B.phoneHref} aria-label={`${t("Call")} ${B.phoneDisplay}`} className="btn-outline px-3.5"><Phone className="size-4" /></a>
+      <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-[minmax(0,1fr)_repeat(3,2.75rem)] gap-1.5 border-t bg-background/95 p-2 backdrop-blur sm:gap-2 sm:p-3 lg:hidden">
+        <a href={B.bookingUrl} {...ext} className="btn-red min-w-0 justify-center gap-1.5 px-2 text-[0.65rem] sm:gap-2 sm:px-4 sm:text-xs"><span className="truncate">{t("Book now")}</span><ArrowRight className="size-4 shrink-0" /></a>
+        <Button variant="outline" className="btn-outline min-h-11 min-w-11 px-2.5 sm:px-3.5" onClick={() => setPricesOpen(true)} aria-label={t("All prices")}><ReceiptText className="size-4 shrink-0" /></Button>
+        <a href={B.mapsUrl} {...ext} aria-label={t("Get directions")} className="btn-outline min-h-11 min-w-11 px-2.5 sm:px-3.5"><Navigation className="size-4 shrink-0" /></a>
+        <a href={B.phoneHref} aria-label={`${t("Call")} ${B.phoneDisplay}`} className="btn-outline min-h-11 min-w-11 px-2.5 sm:px-3.5"><Phone className="size-4 shrink-0" /></a>
       </div>
       {wa && (
         <a href={wa} {...ext} aria-label={t("Chat with Next Cut on WhatsApp")} className="fixed right-4 bottom-20 z-40 grid size-12 place-items-center rounded-full bg-primary text-primary-foreground shadow-glow lg:bottom-6">
