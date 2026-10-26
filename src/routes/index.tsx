@@ -127,7 +127,7 @@ function Page() {
   const wa = B.whatsapp ? `https://wa.me/${B.whatsapp}?text=${encodeURIComponent(B.whatsappText)}` : "";
 
   return (
-    <div className="min-h-screen bg-background pb-20 lg:pb-0">
+    <div className="min-h-screen bg-background pb-[calc(5rem+env(safe-area-inset-bottom))] lg:pb-0">
       <header className="sticky top-0 z-50 border-b bg-background/90 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4">
           <Logo />
@@ -328,7 +328,7 @@ function Page() {
       </footer>
 
       {/* Mobile sticky actions */}
-      <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-[minmax(0,1fr)_repeat(3,2.75rem)] gap-1.5 border-t bg-background/95 p-2 backdrop-blur sm:gap-2 sm:p-3 lg:hidden">
+      <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-[minmax(0,1fr)_repeat(3,2.75rem)] gap-1.5 border-t bg-background/95 px-2 pt-2 pb-[calc(0.5rem+env(safe-area-inset-bottom))] backdrop-blur sm:gap-2 sm:px-3 sm:pt-3 lg:hidden">
         <a href={B.bookingUrl} {...ext} className="btn-red min-w-0 justify-center gap-1.5 px-2 text-[0.65rem] sm:gap-2 sm:px-4 sm:text-xs"><span className="truncate">{t("Book now")}</span><ArrowRight className="size-4 shrink-0" /></a>
         <Button variant="outline" className="btn-outline min-h-11 min-w-11 px-2.5 sm:px-3.5" onClick={() => setPricesOpen(true)} aria-label={t("All prices")}><ReceiptText className="size-4 shrink-0" /></Button>
         <a href={B.mapsUrl} {...ext} aria-label={t("Get directions")} className="btn-outline min-h-11 min-w-11 px-2.5 sm:px-3.5"><Navigation className="size-4 shrink-0" /></a>
