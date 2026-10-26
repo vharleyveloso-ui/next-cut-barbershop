@@ -119,3 +119,45 @@
   transition: border-color .25s, box-shadow .25s, transform .25s;
   &:hover { border-color: color-mix(in oklab, var(--primary) 70%, transparent); box-shadow: var(--glow-red); transform: translateY(-3px); }
 }
+
+
+/* Mobile layout safeguards */
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { width: 100%; max-width: 100%; }
+  img, video, canvas { max-width: 100%; }
+  a, button { overflow-wrap: anywhere; }
+}
+
+@media (max-width: 420px) {
+  .tagline {
+    max-width: 100%;
+    gap: .5rem;
+    letter-spacing: .12em;
+    white-space: normal;
+  }
+
+  .tagline::before { flex: 0 0 1.5rem; }
+
+  .btn-red, .btn-outline { max-width: 100%; }
+
+  section > .mx-auto.max-w-7xl {
+    padding-inline: 1rem;
+  }
+
+  #home h1 { font-size: clamp(1.85rem, 8vw, 2.25rem); }
+  #home h1 .font-script { font-size: clamp(2.2rem, 10vw, 2.75rem); }
+
+  #barbers .barber-card { padding: .75rem; }
+  #barbers .barber-card img { width: 5.5rem; height: 5.5rem; }
+  #barbers .barber-card a { font-size: .6rem; letter-spacing: 0; }
+
+  #location dl > div { align-items: flex-start; }
+  #location dl dd { text-align: right; overflow-wrap: anywhere; }
+}
+
+@supports (padding: max(0px)) {
+  @media (max-width: 1023px) {
+    body { padding-bottom: env(safe-area-inset-bottom); }
+  }
+}
