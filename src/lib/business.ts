@@ -97,8 +97,8 @@ export const BARBERS: { name: string; photo: string; specialties: string[]; book
   { name: "Deyker", photo: b0027, specialties: [] },
   { name: "Jordan", photo: b0030, specialties: [] },
   { name: "Oscar", photo: b0036, specialties: [] },
-  { name: "Emílio", photo: b0039, specialties: [] },
-  { name: "Jefferson", photo: b0051, specialties: [] },
+  { name: "Jefferson", photo: b0039, specialties: [] },
+  { name: "Emílio", photo: b0051, specialties: [] },
   { name: "Zapata", photo: b0053, specialties: [] },
 ];
 

@@ -127,7 +127,7 @@ function Page() {
   const wa = B.whatsapp ? `https://wa.me/${B.whatsapp}?text=${encodeURIComponent(B.whatsappText)}` : "";
 
   return (
-    <div className="min-h-screen bg-background pb-20 lg:pb-0">
+    <div className="min-h-screen bg-background pb-[calc(5rem+env(safe-area-inset-bottom))] lg:pb-0">
       <header className="sticky top-0 z-50 border-b bg-background/90 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4">
           <Logo />
@@ -234,14 +234,12 @@ function Page() {
           <Head tag="Meet the barbers" title="Our team" sub="Different styles. Same standard. Choose your barber in the booking app." />
           <div className="mt-10 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
             {BARBERS.map((b) => (
-              <div key={b.name} className="barber-card card-glow flex flex-col items-center overflow-hidden p-4 text-center sm:p-5">
-                <img src={b.photo} alt={`${b.name}, ${t("barber at Next Cut")}`} width={240} height={240} loading="lazy" className="size-24 rounded-full border-2 border-border bg-muted object-cover object-top sm:size-28" />
-                <div className="mt-3 font-display text-sm sm:text-base">{b.name}</div>
-                <div className="mt-1.5 flex items-center gap-0.5" role="img" aria-label={t("5-star rated barber")}>
-                  {[0, 1, 2, 3, 4].map((s) => <Star key={s} className="size-3.5 fill-star text-star" />)}
-                </div>
-                <span className="mt-2.5 rounded-full bg-available px-3 py-1 text-[0.65rem] font-semibold text-available-foreground">{t("Walk-ins welcome")}</span>
-                <a href={b.bookingUrl ?? B.bookingUrl} {...ext} className="btn-outline mt-3.5 min-h-11 w-full flex-wrap gap-1 px-1 py-2.5 text-center text-[0.62rem] tracking-normal">{t("Book with")} {b.name}</a>
+              <div key={b.name} className="barber-card card-glow flex min-w-0 flex-col items-center overflow-hidden p-3 text-center sm:p-5">
+                <img src={b.photo} alt={`${b.name}, ${t("barber at Next Cut")}`} width={240} height={240} loading="lazy" className="size-24 max-w-full rounded-full border-2 border-border bg-muted object-cover object-top sm:size-28" />
+                <div className="mt-3 max-w-full break-words font-display text-sm sm:text-base">{b.name}</div>
+                <a href={b.bookingUrl ?? B.bookingUrl} {...ext} className="btn-outline mt-3.5 min-h-11 w-full min-w-0 flex-wrap gap-1 px-1 py-2.5 text-center text-[0.62rem] tracking-normal">
+                  {b.bookingUrl ? t("Book with") : t("Book now")}{b.bookingUrl ? ` ${b.name}` : ""}
+                </a>
               </div>
             ))}
           </div>
@@ -330,11 +328,11 @@ function Page() {
       </footer>
 
       {/* Mobile sticky actions */}
-      <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-[1fr_auto_auto_auto] gap-2 border-t bg-background/95 p-3 backdrop-blur lg:hidden">
-        <a href={B.bookingUrl} {...ext} className="btn-red justify-center">{t("Book now")} <ArrowRight className="size-4" /></a>
-        <Button variant="outline" className="btn-outline px-3.5" onClick={() => setPricesOpen(true)} aria-label={t("All prices")}><ReceiptText className="size-4" /></Button>
-        <a href={B.mapsUrl} {...ext} aria-label={t("Get directions")} className="btn-outline px-3.5"><Navigation className="size-4" /></a>
-        <a href={B.phoneHref} aria-label={`${t("Call")} ${B.phoneDisplay}`} className="btn-outline px-3.5"><Phone className="size-4" /></a>
+      <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-[minmax(0,1fr)_repeat(3,2.75rem)] gap-1.5 border-t bg-background/95 px-2 pt-2 pb-[calc(0.5rem+env(safe-area-inset-bottom))] backdrop-blur sm:gap-2 sm:px-3 sm:pt-3 lg:hidden">
+        <a href={B.bookingUrl} {...ext} className="btn-red min-w-0 justify-center gap-1.5 px-2 text-[0.65rem] sm:gap-2 sm:px-4 sm:text-xs"><span className="truncate">{t("Book now")}</span><ArrowRight className="size-4 shrink-0" /></a>
+        <Button variant="outline" className="btn-outline min-h-11 min-w-11 px-2.5 sm:px-3.5" onClick={() => setPricesOpen(true)} aria-label={t("All prices")}><ReceiptText className="size-4 shrink-0" /></Button>
+        <a href={B.mapsUrl} {...ext} aria-label={t("Get directions")} className="btn-outline min-h-11 min-w-11 px-2.5 sm:px-3.5"><Navigation className="size-4 shrink-0" /></a>
+        <a href={B.phoneHref} aria-label={`${t("Call")} ${B.phoneDisplay}`} className="btn-outline min-h-11 min-w-11 px-2.5 sm:px-3.5"><Phone className="size-4 shrink-0" /></a>
       </div>
       {wa && (
         <a href={wa} {...ext} aria-label={t("Chat with Next Cut on WhatsApp")} className="fixed right-4 bottom-20 z-40 grid size-12 place-items-center rounded-full bg-primary text-primary-foreground shadow-glow lg:bottom-6">
