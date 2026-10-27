@@ -61,26 +61,9 @@ const menu = (id: string, name: string, nameEs: string, amount: number | null, m
   id, name, nameEs, amount, minutes, price: amount === null ? "Price varies" : `$${amount.toFixed(2)}`, note: `${minutes} min`,
 });
 export const SERVICES = [
-  menu("women", "Women's Haircut", "Corte de mujer", null, 60),
-  menu("shape-up", "Shape Up", "Perfilado", 15, 15),
-  menu("kids", "Children regular cuts", "Corte regular para niños", 25, 30),
-  menu("haircut-eyebrows", "Haircut Eyebrows", "Corte y cejas", 35, 30),
-  menu("color", "Color Treatment", "Tratamiento de color", null, 45),
   menu("shape-beard", "Shape Up & beard hot towel", "Perfilado y barba con toalla caliente", 25, 30),
-  menu("combo", "Haircuts & beard", "Corte y barba", 40, 30),
-  menu("shampoo", "Shampoo Style", "Lavado y peinado", null, 60),
-  menu("combo-eyebrows", "Haircuts beard & Eyebrows", "Corte, barba y cejas", 45, 45),
-  menu("haircut", "Men's Haircut", "Corte de hombre", 25, 30),
-  menu("beard-conditioning", "Beard conditioning", "Acondicionamiento de barba", 20, 15),
-  menu("beard-dye", "Beard dyeing", "Tinte de barba", 20, 15),
   menu("beard", "Beard trim", "Recorte de barba", 20, 15),
   menu("buzz", "Buzz cut", "Corte al ras", 30, 35),
-  menu("curly", "Curly hair", "Cabello rizado", 25, 30),
-  menu("custom", "Custom cut", "Corte personalizado", 30, 45),
-  menu("eyebrows", "Eyebrows trimming", "Perfilado de cejas", 10, 10),
-  menu("head-shave", "Head shave", "Afeitado de cabeza", 30, 30),
-  menu("scissor", "Scissor cut", "Corte a tijera", 30, 30),
-  menu("seniors", "Seniors cuts", "Corte para adultos mayores", 25, 25),
 ];
 
 // PENDING: Tuesday/Wednesday promotions — add here once confirmed, e.g. { days: "Tue & Wed", text: "...", price: "$..." }
