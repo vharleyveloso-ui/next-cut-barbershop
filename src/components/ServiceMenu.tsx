@@ -3,15 +3,23 @@ import { BUSINESS, SERVICES, GALLERY } from "@/lib/business";
 import { useLanguage } from "@/lib/language";
 import { Button } from "@/components/ui/button";
 
-// Use the original rotating selection of haircut photos for service cards.
-const CUT_PHOTOS = GALLERY.map((_, index) => index);
+// Give every service its own existing gallery photo. The first card uses the bald man with beard photo (gallery index 5).
+const CUT_PHOTOS_BY_SERVICE: Record<string, number> = {
+  "shape-beard": 5,
+  "kids-regular": 1,
+  "haircut-eyebrows-beard": 9,
+  "haircut-beard": 0,
+  "design": 2,
+  "beard": 8,
+  "buzz": 7,
+};
 
 export function ServiceMenu({ onPhoto, onBook }: { onPhoto: (index: number) => void; onBook: (serviceId: string) => void }) {
   const { language, t } = useLanguage();
   return <>
     <div id="cut-examples" className="mt-8 grid scroll-mt-24 grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
       {SERVICES.map((s) => {
-        const gi = CUT_PHOTOS[SERVICES.indexOf(s) % CUT_PHOTOS.length];
+        const gi = CUT_PHOTOS_BY_SERVICE[s.id] ?? 7;
         const g = GALLERY[gi];
         return <article key={s.id} data-service={s.id} className="card-glow flex min-w-0 flex-col overflow-hidden">
           {g && <Button variant="ghost" onClick={() => onPhoto(gi)} aria-label={`${t("View photo")}: ${t(g.alt)}`} className="relative h-auto w-full overflow-hidden whitespace-normal rounded-none p-0">
