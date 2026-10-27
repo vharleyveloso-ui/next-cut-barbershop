@@ -4,7 +4,7 @@ import {
   Instagram, Facebook, MapPin, Clock, Music2, ChevronLeft, ChevronRight, Menu, X, Navigation, MessageCircle, ReceiptText,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { BUSINESS, BARBERS, GALLERY, PROMOTIONS, fullAddress } from "@/lib/business";
+import { BUSINESS, BARBERS, GALLERY, PROMOTIONS, SERVICES, fullAddress } from "@/lib/business";
 import { CutFinder } from "@/components/CutFinder";
 import { ServiceMenu } from "@/components/ServiceMenu";
 import { PriceList } from "@/components/PriceList";
@@ -111,6 +111,9 @@ function Page() {
   const [open, setOpen] = useState(false);
   const [lb, setLb] = useState<number | null>(null);
   const [pricesOpen, setPricesOpen] = useState(false);
+  const [selectedServiceId, setSelectedServiceId] = useState<string | null>(null);
+  const [selectedBarberName, setSelectedBarberName] = useState<string | null>(null);
+  const [bookingDialogOpen, setBookingDialogOpen] = useState(false);
   const track = useRef<HTMLDivElement>(null);
   const scroll = (d: number) => track.current?.scrollBy({ left: d * 280, behavior: "smooth" });
   const team = useRef<HTMLElement>(null);
@@ -125,6 +128,17 @@ function Page() {
     return () => observer.disconnect();
   }, []);
   const wa = B.whatsapp ? `https://wa.me/${B.whatsapp}?text=${encodeURIComponent(B.whatsappText)}` : "";
+  const selectedService = SERVICES.find((service) => service.id === selectedServiceId);
+  const selectedBarber = BARBERS.find((barber) => barber.name === selectedBarberName);
+  const chooseService = (serviceId: string) => {
+    setSelectedServiceId(serviceId);
+    setSelectedBarberName(null);
+    requestAnimationFrame(() => team.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
+  };
+  const chooseBarber = (barberName: string) => {
+    setSelectedBarberName(barberName);
+    setBookingDialogOpen(true);
+  };
 
   return (
     <div className="min-h-screen bg-background pb-[calc(5rem+env(safe-area-inset-bottom))] lg:pb-0">
@@ -181,7 +195,7 @@ function Page() {
             <Head tag="Services & prices" title="What we do" />
             <a href={B.bookingUrl} {...ext} className="flex items-center gap-2 text-xs font-semibold tracking-wider uppercase hover:text-primary"><CalendarCheck className="size-4 text-primary" />{t("See full menu & book")}</a>
           </div>
-          <ServiceMenu onPhoto={setLb} />
+          <ServiceMenu onPhoto={setLb} onBook={chooseService} />
           {PROMOTIONS.length > 0 && (
             <div className="mt-6 grid gap-4 md:grid-cols-2">
               {PROMOTIONS.map((p) => (
@@ -232,19 +246,54 @@ function Page() {
       <section ref={team} id="barbers" className={`scroll-mt-20 border-b ${teamVisible ? "team-in-view" : ""}`}>
         <div className="mx-auto max-w-7xl px-5 py-20">
           <Head tag="Meet the barbers" title="Our team" sub="Different styles. Same standard. Choose your barber in the booking app." />
+          {selectedService && (
+            <div className="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-md border border-primary/50 bg-card p-4">
+              <div className="min-w-0">
+                <p className="text-xs font-semibold tracking-wider text-primary uppercase">{t("Selected service")}</p>
+                <p className="mt-1 font-semibold">{language === "es" ? selectedService.nameEs : selectedService.name} <span className="text-muted-foreground">· {selectedService.amount === null ? t("Price varies") : selectedService.price}</span></p>
+              </div>
+              <Button type="button" variant="outline" className="btn-outline min-h-11" onClick={() => { setSelectedServiceId(null); setSelectedBarberName(null); document.getElementById("services")?.scrollIntoView({ behavior: "smooth", block: "start" }); }}>
+                {t("Change service")}
+              </Button>
+            </div>
+          )}
           <div className="mt-10 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
             {BARBERS.map((b) => (
               <div key={b.name} className="barber-card card-glow flex min-w-0 flex-col items-center overflow-hidden p-3 text-center sm:p-5">
                 <img src={b.photo} alt={`${b.name}, ${t("barber at Next Cut")}`} width={240} height={240} loading="lazy" className="size-24 max-w-full rounded-full border-2 border-border bg-muted object-cover object-top sm:size-28" />
                 <div className="mt-3 max-w-full break-words font-display text-sm sm:text-base">{b.name}</div>
-                <a href={b.bookingUrl ?? B.bookingUrl} {...ext} className="btn-outline mt-3.5 min-h-11 w-full min-w-0 flex-wrap gap-1 px-1 py-2.5 text-center text-[0.62rem] tracking-normal">
-                  {b.bookingUrl ? t("Book with") : t("Book now")}{b.bookingUrl ? ` ${b.name}` : ""}
-                </a>
+                <button type="button" onClick={() => chooseBarber(b.name)} className="btn-outline mt-3.5 min-h-11 w-full min-w-0 flex-wrap gap-1 px-1 py-2.5 text-center text-[0.62rem] tracking-normal">
+                  {t(selectedService ? "Choose barber" : "Book with")} {b.name}
+                </button>
               </div>
             ))}
           </div>
         </div>
       </section>
+
+      {bookingDialogOpen && selectedBarber && (
+        <div role="dialog" aria-modal="true" aria-labelledby="booking-selection-title" className="fixed inset-0 z-[70] grid place-items-center bg-background/85 p-4" onClick={() => setBookingDialogOpen(false)}>
+          <div className="w-full max-w-md rounded-xl border bg-card p-6 shadow-xl" onClick={(event) => event.stopPropagation()}>
+            <span className="tagline">{t("Almost there")}</span>
+            <h3 id="booking-selection-title" className="mt-2 font-display text-2xl">{t("Your booking selection")}</h3>
+            <div className="mt-5 space-y-3 rounded-md border p-4">
+              <div>
+                <p className="text-xs text-muted-foreground">{t("Selected service")}</p>
+                <p className="font-semibold">{selectedService ? (language === "es" ? selectedService.nameEs : selectedService.name) : t("Choose your service in Square")}</p>
+              </div>
+              <div>
+                <p className="text-xs text-muted-foreground">{t("Selected barber")}</p>
+                <p className="font-semibold">{selectedBarber.name}</p>
+              </div>
+            </div>
+            <p className="mt-4 text-sm text-muted-foreground">{t("Square will open in a new tab. The current booking link does not preselect the service or barber, so please choose the same options in Square to complete your appointment.")}</p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Button type="button" variant="outline" className="btn-outline min-h-11 flex-1" onClick={() => setBookingDialogOpen(false)}>{t("Back")}</Button>
+              <a href={selectedBarber.bookingUrl ?? B.bookingUrl} target="_blank" rel="noopener noreferrer" onClick={() => setBookingDialogOpen(false)} className="btn-red min-h-11 flex-1 justify-center">{t("Continue to Square")} <ArrowRight className="size-4" /></a>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* GALLERY */}
       <section id="gallery" className="scroll-mt-20 border-b">
