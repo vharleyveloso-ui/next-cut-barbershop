@@ -28,6 +28,6 @@ export function ServiceMenu({ onPhoto, onBook }: { onPhoto: (index: number) => v
         </article>;
       })}
     </div>
-    <Button asChild className="btn-red mt-8 h-auto whitespace-normal"><a href={BUSINESS.bookingUrl} target="_blank" rel="noopener noreferrer">{t("Book now")}<ArrowRight className="size-4" /></a></Button>
+    <Button asChild className="btn-red mt-8 h-auto whitespace-normal"><a href={`https://wa.me/${BUSINESS.whatsapp}?text=${encodeURIComponent(BUSINESS.whatsappText)}`} target="_blank" rel="noopener noreferrer">{t("Book now")}<ArrowRight className="size-4" /></a></Button>
   </>;
 }
