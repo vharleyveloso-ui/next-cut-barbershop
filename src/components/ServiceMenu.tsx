@@ -3,15 +3,15 @@ import { BUSINESS, SERVICES, GALLERY } from "@/lib/business";
 import { useLanguage } from "@/lib/language";
 import { Button } from "@/components/ui/button";
 
-// Match each service to the closest existing real photo in the gallery.
-// Gallery indexes: 0 fade + beard, 1 kids cut, 2 kids design, 5 skin fade + beard, 7 haircut.
+// Use a different existing gallery photo for every service card.
+// Selected by closest available match; each index must remain unique.
 const CUT_PHOTOS_BY_SERVICE: Record<string, number> = {
-  "shape-beard": 5,
+  "shape-beard": 0,
   "kids-regular": 1,
-  "haircut-eyebrows-beard": 0,
+  "haircut-eyebrows-beard": 9,
   "haircut-beard": 5,
   "design": 2,
-  "beard": 5,
+  "beard": 8,
   "buzz": 7,
 };
 
