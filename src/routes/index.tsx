@@ -286,10 +286,10 @@ function Page() {
                 <p className="font-semibold">{selectedBarber.name}</p>
               </div>
             </div>
-            <p className="mt-4 text-sm text-muted-foreground">{t("Square will open in a new tab. The current booking link does not preselect the service or barber, so please choose the same options in Square to complete your appointment.")}</p>
+            <p className="mt-4 text-sm text-muted-foreground">{t("WhatsApp will open with a message containing your selected service and barber. You can send it to confirm availability and your appointment time.")}</p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Button type="button" variant="outline" className="btn-outline min-h-11 flex-1" onClick={() => setBookingDialogOpen(false)}>{t("Back")}</Button>
-              <a href={selectedBarber.bookingUrl ?? B.bookingUrl} target="_blank" rel="noopener noreferrer" onClick={() => setBookingDialogOpen(false)} className="btn-red min-h-11 flex-1 justify-center">{t("Continue to Square")} <ArrowRight className="size-4" /></a>
+              <a href={`https://wa.me/${B.whatsapp}?text=${encodeURIComponent(`Hi Next Cut! I'd like to book an appointment. Service: ${selectedService ? selectedService.name : "Not selected"}. Preferred barber: ${selectedBarber.name}. Please let me know what times are available.`)}`} target="_blank" rel="noopener noreferrer" onClick={() => setBookingDialogOpen(false)} className="btn-red min-h-11 flex-1 justify-center">{t("Book via WhatsApp")} <MessageCircle className="size-4" /></a>
             </div>
           </div>
         </div>
