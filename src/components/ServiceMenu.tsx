@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 // Gallery indexes that show real cuts (not shop interiors), cycled across the menu.
 const CUT_PHOTOS = [0, 1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 
-export function ServiceMenu({ onPhoto }: { onPhoto: (index: number) => void }) {
+export function ServiceMenu({ onPhoto, onBook }: { onPhoto: (index: number) => void; onBook: (serviceId: string) => void }) {
   const { language, t } = useLanguage();
   return <>
     <div id="cut-examples" className="mt-8 grid scroll-mt-24 grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
@@ -18,13 +18,16 @@ export function ServiceMenu({ onPhoto }: { onPhoto: (index: number) => void }) {
             <img src={g.src} alt={t(g.alt)} loading="lazy" width={480} height={600} className="aspect-[4/5] w-full bg-muted object-cover" />
           </Button>}
           <div className="flex flex-1 flex-col p-3.5 sm:p-4">
-            <h3 className="text-sm font-semibold sm:text-base">{language === "es" ? s.nameEs : s.name}</h3>
+            <h3 className="text-[13px] font-semibold sm:text-[15px]">{language === "es" ? s.nameEs : s.name}</h3>
             <p className="mt-1.5 flex items-center gap-1.5 text-xs text-muted-foreground"><Clock className="size-3" />{s.minutes === 60 ? t("1 hr") : `${s.minutes} ${t("minutes")}`}</p>
             <span className="mt-3 text-right font-display text-lg text-primary sm:text-xl">{s.amount === null ? t("Price varies") : s.price}</span>
+            <Button type="button" onClick={() => onBook(s.id)} className="btn-red mt-4 h-auto min-h-11 w-full justify-center whitespace-normal px-2 text-xs sm:text-sm">
+              {t("Book this service")} <ArrowRight className="size-4 shrink-0" />
+            </Button>
           </div>
         </article>;
       })}
     </div>
-    <Button asChild className="btn-red mt-8 h-auto whitespace-normal"><a href={BUSINESS.bookingUrl} target="_blank" rel="noopener noreferrer">{t("Book now")}<ArrowRight className="size-4" /></a></Button>
+    <Button asChild className="btn-red mt-8 h-auto whitespace-normal"><a href={`https://wa.me/${BUSINESS.whatsapp}?text=${encodeURIComponent(BUSINESS.whatsappText)}`} target="_blank" rel="noopener noreferrer">{t("Book now")}<ArrowRight className="size-4" /></a></Button>
   </>;
 }
