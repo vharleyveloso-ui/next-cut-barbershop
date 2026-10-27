@@ -5,13 +5,13 @@ import { Button } from "@/components/ui/button";
 
 // Give every service its own existing gallery photo. The first card uses the bald man with beard photo (gallery index 5).
 const CUT_PHOTOS_BY_SERVICE: Record<string, number> = {
-  "shape-beard": 5,
+  "shape-beard": 7,
   "kids-regular": 1,
   "haircut-eyebrows-beard": 9,
   "haircut-beard": 0,
   "design": 2,
   "beard": 8,
-  "buzz": 7,
+  "buzz": 5,
 };
 
 export function ServiceMenu({ onPhoto, onBook }: { onPhoto: (index: number) => void; onBook: (serviceId: string) => void }) {
