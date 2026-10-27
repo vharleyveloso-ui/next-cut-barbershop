@@ -154,7 +154,7 @@ function Page() {
             </div>
             <Button variant="outline" className="btn-outline hidden lg:inline-flex" onClick={() => setPricesOpen(true)}><ReceiptText className="size-4" />{t("Prices")}</Button>
             <a href={B.phoneHref} className="hidden items-center gap-2 text-sm font-semibold md:flex"><Phone className="size-4" />{B.phoneDisplay}</a>
-            <a href={B.bookingUrl} {...ext} className="btn-red hidden sm:inline-flex">{t("Book now")} <ArrowRight className="size-4" /></a>
+            <a href={wa} {...ext} className="btn-red hidden sm:inline-flex">{t("Book now")} <ArrowRight className="size-4" /></a>
             <Button variant="ghost" className="grid size-11 place-items-center xl:hidden" onClick={() => setOpen(!open)} aria-label={t(open ? "Close menu" : "Open menu")} aria-expanded={open}>{open ? <X /> : <Menu />}</Button>
           </div>
         </div>
@@ -180,7 +180,7 @@ function Page() {
           </h1>
           <p className="mt-6 max-w-md text-muted-foreground">{t("Next Cut Barbershop is Orlando's spot for fades, scissor cuts, beard work and kids cuts. Book online in a minute or walk right in.")}</p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <a href={B.bookingUrl} {...ext} className="btn-red">{t("Book now")} <ArrowRight className="size-4" /></a>
+            <a href={wa} {...ext} className="btn-red">{t("Book now")} <ArrowRight className="size-4" /></a>
             <a href={B.mapsUrl} {...ext} className="btn-outline bg-background/40"><Navigation className="size-4" />{t("Get directions")}</a>
             <Button asChild variant="outline" className="btn-outline h-auto whitespace-normal bg-background/40"><a href="#services"><Scissors className="size-4" />{t("Prices & cut examples")}</a></Button>
           </div>
@@ -193,7 +193,7 @@ function Page() {
         <div className="mx-auto max-w-7xl px-5 py-16">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <Head tag="Services & prices" title="What we do" />
-            <a href={B.bookingUrl} {...ext} className="flex items-center gap-2 text-xs font-semibold tracking-wider uppercase hover:text-primary"><CalendarCheck className="size-4 text-primary" />{t("See full menu & book")}</a>
+            <a href={wa} {...ext} className="flex items-center gap-2 text-xs font-semibold tracking-wider uppercase hover:text-primary"><CalendarCheck className="size-4 text-primary" />{t("See full menu & book")}</a>
           </div>
           <ServiceMenu onPhoto={setLb} onBook={chooseService} />
           {PROMOTIONS.length > 0 && (
@@ -245,7 +245,7 @@ function Page() {
       {/* TEAM */}
       <section ref={team} id="barbers" className={`scroll-mt-20 border-b ${teamVisible ? "team-in-view" : ""}`}>
         <div className="mx-auto max-w-7xl px-5 py-20">
-          <Head tag="Meet the barbers" title="Our team" sub="Different styles. Same standard. Choose your barber in the booking app." />
+          <Head tag="Meet the barbers" title="Our team" sub="Different styles. Same standard. Choose your barber and message us on WhatsApp." />
           {selectedService && (
             <div className="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-md border border-primary/50 bg-card p-4">
               <div className="min-w-0">
@@ -349,7 +349,7 @@ function Page() {
             <h2 className="mt-3 font-display text-xl sm:text-2xl md:text-3xl">{t("Book your appointment")}</h2>
             <p className="mt-1 text-muted-foreground">{t("Online booking or walk-ins welcome.")}</p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <a href={B.bookingUrl} {...ext} className="btn-red">{t("Book now")} <ArrowRight className="size-4" /></a>
+              <a href={wa} {...ext} className="btn-red">{t("Book now")} <ArrowRight className="size-4" /></a>
               <a href={B.phoneHref} className="btn-outline"><Phone className="size-4" />{B.phoneDisplay}</a>
             </div>
           </div>
@@ -378,7 +378,7 @@ function Page() {
 
       {/* Mobile sticky actions */}
       <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-[minmax(0,1fr)_repeat(3,2.75rem)] gap-1.5 border-t bg-background/95 px-2 pt-2 pb-[calc(0.5rem+env(safe-area-inset-bottom))] backdrop-blur sm:gap-2 sm:px-3 sm:pt-3 lg:hidden">
-        <a href={B.bookingUrl} {...ext} className="btn-red min-w-0 justify-center gap-1.5 px-2 text-[0.65rem] sm:gap-2 sm:px-4 sm:text-xs"><span className="truncate">{t("Book now")}</span><ArrowRight className="size-4 shrink-0" /></a>
+        <a href={wa} {...ext} className="btn-red min-w-0 justify-center gap-1.5 px-2 text-[0.65rem] sm:gap-2 sm:px-4 sm:text-xs"><span className="truncate">{t("Book now")}</span><ArrowRight className="size-4 shrink-0" /></a>
         <Button variant="outline" className="btn-outline min-h-11 min-w-11 px-2.5 sm:px-3.5" onClick={() => setPricesOpen(true)} aria-label={t("All prices")}><ReceiptText className="size-4 shrink-0" /></Button>
         <a href={B.mapsUrl} {...ext} aria-label={t("Get directions")} className="btn-outline min-h-11 min-w-11 px-2.5 sm:px-3.5"><Navigation className="size-4 shrink-0" /></a>
         <a href={B.phoneHref} aria-label={`${t("Call")} ${B.phoneDisplay}`} className="btn-outline min-h-11 min-w-11 px-2.5 sm:px-3.5"><Phone className="size-4 shrink-0" /></a>
