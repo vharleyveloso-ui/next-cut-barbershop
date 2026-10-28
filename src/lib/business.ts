@@ -61,13 +61,14 @@ const menu = (id: string, name: string, nameEs: string, amount: number | null, m
   id, name, nameEs, amount, minutes, price: amount === null ? "Price varies" : `$${amount.toFixed(2)}`, note: `${minutes} min`,
 });
 export const SERVICES = [
+  menu("buzz", "Haircut, Eyebrow, Beard", "Corte, cejas y barba", 45, 45),
   menu("shape-beard", "Shape Up & beard hot towel", "Perfilado y barba con toalla caliente", 25, 30),
   menu("kids-regular", "Regular Haircut", "Corte regular", 30, 30),
-  menu("haircut-eyebrows-beard", "Haircut & Eyebrows", "Corte y cejas", 35, 45),
+
   menu("haircut-beard", "Haircuts & Beard", "Corte y barba", 40, 30),
   menu("design", "Design", "Diseño", 10, 15),
   menu("beard", "V-Cut", "V-Cut", 35, 15),
-  menu("buzz", "Buzz Cut", "Corte al ras", 30, 35),
+
 ];
 
 // PENDING: Tuesday/Wednesday promotions — add here once confirmed, e.g. { days: "Tue & Wed", text: "...", price: "$..." }
