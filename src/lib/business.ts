@@ -58,7 +58,7 @@ export const fullAddress = `${BUSINESS.street}, ${BUSINESS.city}, ${BUSINESS.reg
 // Confirmed client menu, October 24, 2026. Null amounts explicitly mean variable pricing.
 export type Service = { id: string; name: string; nameEs: string; amount: number | null; minutes: number; price: string; note: string };
 const menu = (id: string, name: string, nameEs: string, amount: number | null, minutes: number): Service => ({
-  id, name, nameEs, amount, minutes, price: amount === null ? "Price varies" : `$${amount.toFixed(2)}`, note: `${minutes} min`,
+  id, name, nameEs, amount, minutes, price: id === "beard" ? "$10+" : amount === null ? "Price varies" : `${amount.toFixed(2)}`, note: `${minutes} min`,
 });
 export const SERVICES = [
   menu("buzz", "Haircut, Eyebrow, Beard", "Corte, cejas y barba", 45, 45),
