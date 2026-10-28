@@ -28,7 +28,7 @@ export function ServiceMenu({ onPhoto, onBook }: { onPhoto: (index: number) => v
           <div className="flex flex-1 flex-col p-3.5 sm:p-4">
             <h3 className="text-[13px] font-semibold sm:text-[15px]">{language === "es" ? s.nameEs : s.name}</h3>
             <p className="mt-1.5 flex items-center gap-1.5 text-xs text-muted-foreground"><Clock className="size-3" />{s.minutes === 60 ? t("1 hr") : `${s.minutes} ${t("minutes")}`}</p>
-            <span className="mt-3 text-right font-display text-lg text-primary sm:text-xl">{s.amount === null ? t("Price varies") : s.price}</span>
+            <span className="mt-3 text-right font-display text-lg text-primary sm:text-xl">{s.id === "beard" ? s.price : s.amount === null ? t("Price varies") : s.price}</span>
             <Button type="button" onClick={() => onBook(s.id)} className="btn-red mt-4 h-auto min-h-11 w-full justify-center whitespace-normal px-2 text-xs sm:text-sm">
               {t("Book this service")} <ArrowRight className="size-4 shrink-0" />
             </Button>
