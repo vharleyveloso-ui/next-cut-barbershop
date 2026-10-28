@@ -23,7 +23,7 @@ export function ServiceMenu({ onPhoto, onBook }: { onPhoto: (index: number) => v
         const g = GALLERY[gi];
         return <article key={s.id} data-service={s.id} className="card-glow flex min-w-0 flex-col overflow-hidden">
           {g && <Button variant="ghost" onClick={() => onPhoto(gi)} aria-label={`${t("View photo")}: ${t(g.alt)}`} className="relative h-auto w-full overflow-hidden whitespace-normal rounded-none p-0">
-            <img src={g.src} alt={t(g.alt)} loading="lazy" width={480} height={600} className="aspect-[4/5] w-full bg-muted object-cover" />
+            <img src={g.src} alt={t(g.alt)} loading="lazy" width={480} height={600} className={`aspect-[4/5] w-full bg-muted object-cover ${s.id === "shape-beard" ? "object-[center_40%]" : ""}`} />
           </Button>}
           <div className="flex flex-1 flex-col p-3.5 sm:p-4">
             <h3 className="text-[13px] font-semibold sm:text-[15px]">{language === "es" ? s.nameEs : s.name}</h3>
