@@ -286,11 +286,12 @@ function Page() {
                 <p className="font-semibold">{selectedBarber.name}</p>
               </div>
             </div>
-            <p className="mt-4 text-sm text-muted-foreground">{t("WhatsApp will open with a message containing your selected service and barber. You can send it to confirm availability and your appointment time.")}</p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Button type="button" variant="outline" className="btn-outline min-h-11 flex-1" onClick={() => setBookingDialogOpen(false)}>{t("Back")}</Button>
-              <a href={`https://wa.me/${B.whatsapp}?text=${encodeURIComponent(`Hi Next Cut! I'd like to book an appointment. Service: ${selectedService ? selectedService.name : "Not selected"}. Preferred barber: ${selectedBarber.name}. Please let me know what times are available.`)}`} target="_blank" rel="noopener noreferrer" onClick={() => setBookingDialogOpen(false)} className="btn-red min-h-11 flex-1 justify-center">{t("Book via WhatsApp")} <MessageCircle className="size-4" /></a>
+            <p className="mt-4 text-sm text-muted-foreground">{t("Choose how you'd like to book. WhatsApp sends your selected service and barber in a message; Square opens the online booking page with the full service menu.")}</p>
+            <div className="mt-6 grid gap-3 sm:grid-cols-2">
+              <a href={`https://wa.me/${B.whatsapp}?text=${encodeURIComponent(`Hi Next Cut! I'd like to book an appointment. Service: ${selectedService ? selectedService.name : "Not selected"}. Preferred barber: ${selectedBarber.name}. Please let me know what times are available.`)}`} target="_blank" rel="noopener noreferrer" onClick={() => setBookingDialogOpen(false)} className="btn-red min-h-12 justify-center">{t("Book via WhatsApp")} <MessageCircle className="size-4" /></a>
+              <a href={B.bookingUrl} target="_blank" rel="noopener noreferrer" onClick={() => setBookingDialogOpen(false)} className="btn-outline min-h-12 justify-center">{t("Book through Square")} <CalendarCheck className="size-4" /></a>
             </div>
+            <Button type="button" variant="ghost" className="mt-3 w-full" onClick={() => setBookingDialogOpen(false)}>{t("Back")}</Button>
           </div>
         </div>
       )}
