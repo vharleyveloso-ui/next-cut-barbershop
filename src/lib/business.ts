@@ -64,7 +64,7 @@ export const SERVICES = [
   menu("buzz", "Haircut, Eyebrow, Beard", "Corte, cejas y barba", 45, 45),
   menu("shape-beard", "Shape Up & beard hot towel", "Perfilado y barba con toalla caliente", 25, 30),
   menu("kids-regular", "Regular Haircut", "Corte regular", 30, 30),
-
+  menu("haircut-eyebrows", "Haircut & Eyebrows", "Corte y cejas", 35, 30),
   menu("haircut-beard", "Haircuts & Beard", "Corte y barba", 40, 30),
   menu("design", "Mohawk", "Mohawk", 30, 15),
   menu("beard", "Design", "Diseño", null, 15),
