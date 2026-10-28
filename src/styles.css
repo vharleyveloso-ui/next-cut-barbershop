@@ -161,3 +161,28 @@
     body { padding-bottom: env(safe-area-inset-bottom); }
   }
 }
+
+/* Spanish copy can be longer than English; keep translated text fully visible. */
+html[lang="es"] h1,
+html[lang="es"] h2,
+html[lang="es"] h3,
+html[lang="es"] p,
+html[lang="es"] label,
+html[lang="es"] .card-glow span,
+html[lang="es"] .card-glow button,
+html[lang="es"] a,
+html[lang="es"] button {
+  min-width: 0;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+
+html[lang="es"] .btn-red,
+html[lang="es"] .btn-outline {
+  letter-spacing: 0;
+  line-height: 1.3;
+  text-align: center;
+}
+
