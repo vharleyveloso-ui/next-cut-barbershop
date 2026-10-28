@@ -63,7 +63,7 @@ const menu = (id: string, name: string, nameEs: string, amount: number | null, m
 export const SERVICES = [
   menu("shape-beard", "Shape Up & beard hot towel", "Perfilado y barba con toalla caliente", 25, 30),
   menu("kids-regular", "Regular Haircut", "Corte regular", 30, 30),
-  menu("haircut-eyebrows-beard", "Haircut, Eyebrows & Beard Hot Towel", "Corte, cejas y barba con toalla caliente", 45, 45),
+  menu("haircut-eyebrows-beard", "Haircut & Eyebrows", "Corte y cejas", 45, 45),
   menu("haircut-beard", "Haircuts & Beard", "Corte y barba", 40, 30),
   menu("design", "Design", "Diseño", 10, 15),
   menu("beard", "V-Cut", "V-Cut", 20, 15),
