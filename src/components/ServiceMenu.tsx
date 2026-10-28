@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 const CUT_PHOTOS_BY_SERVICE: Record<string, number> = {
   "shape-beard": 7,
   "kids-regular": 1,
-  "haircut-eyebrows-beard": 9,
+  "haircut-eyebrows": 9,
   "haircut-beard": 0,
   "design": 2,
   "beard": 8,
