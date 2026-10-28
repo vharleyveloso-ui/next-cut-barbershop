@@ -66,7 +66,7 @@ export const SERVICES = [
   menu("haircut-eyebrows-beard", "Haircut & Eyebrows", "Corte y cejas", 45, 45),
   menu("haircut-beard", "Haircuts & Beard", "Corte y barba", 40, 30),
   menu("design", "Design", "Diseño", 10, 15),
-  menu("beard", "V-Cut", "V-Cut", 20, 15),
+  menu("beard", "V-Cut", "V-Cut", 35, 15),
   menu("buzz", "Buzz Cut", "Corte al ras", 30, 35),
 ];
 
