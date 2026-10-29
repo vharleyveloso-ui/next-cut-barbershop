@@ -29,6 +29,21 @@ export function CutFinder() {
 
   const service = res?.ok ? SERVICES.find((s) => s.id === res.serviceId) : null;
   const name = service ? (language === "es" ? service.nameEs : service.name) : "";
+  const recommendationEmail = service && res?.ok
+    ? `mailto:Nextcut1723@gmail.com?subject=${encodeURIComponent("Haircut recommendation request - Next Cut Barbershop")}&body=${encodeURIComponent([
+        "Hi Next Cut Barbershop,",
+        "",
+        "I'd like to ask about the recommended service.",
+        "",
+        `What I'm looking for: ${text}`,
+        `Recommended service: ${name}`,
+        `Price: ${service.price}`,
+        `Estimated duration: ${service.minutes} minutes`,
+        `Recommended barber: ${res.barber ?? "Any available barber"}`,
+        "",
+        "Please let me know availability. Thank you!",
+      ].join("\\n"))}`
+    : "mailto:Nextcut1723@gmail.com";
 
   return (
     <div className="grid gap-8 lg:grid-cols-2">
@@ -54,7 +69,7 @@ export function CutFinder() {
             <div className="text-sm font-semibold text-primary">{t(service.price)} · {service.minutes} min</div>
             <p className="mt-3 text-sm text-muted-foreground">{res.reason}</p>
             <p className="mt-3 text-sm">{t("Barber")}: <span className="font-semibold">{res.barber ?? t("Any available barber")}</span></p>
-            <a href={BUSINESS.bookingUrl} target="_blank" rel="noreferrer" className="btn-red mt-5">{t("Book")} {name} <ArrowRight className="size-4" /></a>
+            <a href={recommendationEmail} className="btn-red mt-5">{t("Email my recommendation")} <ArrowRight className="size-4" /></a>
           </div>
         )}
       </div>
