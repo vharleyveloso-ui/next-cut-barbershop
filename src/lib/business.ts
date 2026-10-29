@@ -37,7 +37,7 @@ export const BUSINESS = {
   city: "Orlando",
   region: "FL",
   zip: "32809",
-  bookingUrl: "https://squareup.com/appointments/book/BV32J23P8XBXG",
+  bookingUrl: "https://next-cut-orlando.cloveronline.com",
   mapsUrl: "https://www.google.com/maps/dir/?api=1&destination=Next+Cut+Barbershop,+1723+W+Oak+Ridge+Rd,+Orlando,+FL+32809",
   reviewsUrl: "https://www.google.com/maps/search/?api=1&query=Next+Cut+Barbershop+1723+W+Oak+Ridge+Rd+Orlando+FL",
   instagram: "https://www.instagram.com/nextcut1_official/",
