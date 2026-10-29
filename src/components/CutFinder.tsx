@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { ArrowRight, Loader2, Wand2 } from "lucide-react";
 import { recommendCut, type Recommendation } from "@/lib/recommend.functions";
-import { BUSINESS, SERVICES } from "@/lib/business";
+import { SERVICES } from "@/lib/business";
 import { useLanguage } from "@/lib/language";
 import { Button } from "@/components/ui/button";
 
