@@ -279,17 +279,17 @@ function Page() {
             <div className="mt-5 space-y-3 rounded-md border p-4">
               <div>
                 <p className="text-xs text-muted-foreground">{t("Selected service")}</p>
-                <p className="font-semibold">{selectedService ? (language === "es" ? selectedService.nameEs : selectedService.name) : t("Choose your service in Square")}</p>
+                <p className="font-semibold">{selectedService ? (language === "es" ? selectedService.nameEs : selectedService.name) : t("Choose your service on Clover")}</p>
               </div>
               <div>
                 <p className="text-xs text-muted-foreground">{t("Selected barber")}</p>
                 <p className="font-semibold">{selectedBarber.name}</p>
               </div>
             </div>
-            <p className="mt-4 text-sm text-muted-foreground">{t("Choose how you'd like to book. WhatsApp sends your selected service and barber in a message; Square opens the online booking page with the full service menu.")}</p>
+            <p className="mt-4 text-sm text-muted-foreground">{t("Choose how you'd like to book. WhatsApp sends your selected service and barber in a message; Clover opens the online booking page with the full service menu.")}</p>
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
               <a href={`https://wa.me/${B.whatsapp}?text=${encodeURIComponent(`Hi Next Cut! I'd like to book an appointment. Service: ${selectedService ? selectedService.name : "Not selected"}. Preferred barber: ${selectedBarber.name}. Please let me know what times are available.`)}`} target="_blank" rel="noopener noreferrer" onClick={() => setBookingDialogOpen(false)} className="btn-red min-h-12 justify-center">{t("Book via WhatsApp")} <MessageCircle className="size-4" /></a>
-              <a href={B.bookingUrl} target="_blank" rel="noopener noreferrer" onClick={() => setBookingDialogOpen(false)} className="btn-outline min-h-12 justify-center">{t("Book through Square")} <CalendarCheck className="size-4" /></a>
+              <a href={B.bookingUrl} target="_blank" rel="noopener noreferrer" onClick={() => setBookingDialogOpen(false)} className="btn-outline min-h-12 justify-center">{t("Book through Clover")} <CalendarCheck className="size-4" /></a>
             </div>
             <Button type="button" variant="ghost" className="mt-3 w-full" onClick={() => setBookingDialogOpen(false)}>{t("Back")}</Button>
           </div>
