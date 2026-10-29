@@ -29,21 +29,21 @@ export function CutFinder() {
 
   const service = res?.ok ? SERVICES.find((s) => s.id === res.serviceId) : null;
   const name = service ? (language === "es" ? service.nameEs : service.name) : "";
-  const recommendationEmail = service && res?.ok
-    ? `mailto:Nextcut1723@gmail.com?subject=${encodeURIComponent("Haircut recommendation request - Next Cut Barbershop")}&body=${encodeURIComponent([
-        "Hi Next Cut Barbershop,",
-        "",
-        "I'd like to ask about the recommended service.",
-        "",
-        `What I'm looking for: ${text}`,
-        `Recommended service: ${name}`,
-        `Price: ${service.price}`,
-        `Estimated duration: ${service.minutes} minutes`,
-        `Recommended barber: ${res.barber ?? "Any available barber"}`,
-        "",
-        "Please let me know availability. Thank you!",
-      ].join("\\n"))}`
-    : "mailto:Nextcut1723@gmail.com";
+  const recommendationEmail = `mailto:Nextcut1723@gmail.com?subject=${encodeURIComponent("Haircut recommendation request - Next Cut Barbershop")}&body=${encodeURIComponent([
+    "Hi Next Cut Barbershop,",
+    "",
+    "I\'d like help choosing a haircut.",
+    "",
+    `What I\'m looking for: ${text}`,
+    ...(service && res?.ok ? [
+      `Recommended service: ${name}`,
+      `Price: ${service.price}`,
+      `Estimated duration: ${service.minutes} minutes`,
+      `Recommended barber: ${res.barber ?? "Any available barber"}`,
+    ] : ["I couldn\'t get an automatic recommendation on the website. Please recommend a suitable service."]),
+    "",
+    "Please let me know availability. Thank you!",
+  ].join("\\n"))}`;
 
   return (
     <div className="grid gap-8 lg:grid-cols-2">
@@ -61,7 +61,13 @@ export function CutFinder() {
       <div aria-live="polite" className="flex flex-col justify-center">
         {!res && !loading && <p className="text-muted-foreground">{t("Tell us what you're after and we'll suggest the right service to book.")}</p>}
         {loading && <p className="text-muted-foreground">{t("Thinking about your cut…")}</p>}
-        {res && !res.ok && <p className="text-primary">{t(res.error)}</p>}
+        {res && !res.ok && (
+          <div className="space-y-4">
+            <p className="text-primary">{t(res.error)}</p>
+            <p className="text-sm text-muted-foreground">{t("You can email the shop directly with your haircut request instead.")}</p>
+            <a href={recommendationEmail} className="btn-red mt-2">{t("Email my recommendation")} <ArrowRight className="size-4" /></a>
+          </div>
+        )}
         {res?.ok && service && (
           <div className="rounded-md border border-primary/60 bg-card p-6">
             <span className="tagline">{t("We recommend")}</span>
