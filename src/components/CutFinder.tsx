@@ -16,7 +16,7 @@ export function CutFinder() {
     "",
     "Please let me know which service fits best and what appointment times are available.",
     "Thank you!",
-  ].join("\\n"))}`;
+  ].join("\n"))}`;
 
   return (
     <div className="grid gap-8 lg:grid-cols-2">
