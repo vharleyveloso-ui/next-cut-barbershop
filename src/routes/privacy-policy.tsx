@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { BUSINESS, fullAddress } from "@/lib/business";
+import { fullAddress } from "@/lib/business";
 
 export const Route = createFileRoute("/privacy-policy")({
   head: () => ({
