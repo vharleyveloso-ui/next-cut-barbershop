@@ -374,6 +374,10 @@ function Page() {
         <a href={B.phoneHref} className="flex items-center gap-2 text-sm"><Phone className="size-4 text-primary" />{B.phoneDisplay}</a>
         <a href={B.mapsUrl} {...ext} className="flex items-center gap-2 text-sm hover:text-primary"><MapPin className="size-4 text-primary" />{fullAddress}</a>
         <Socials />
+        <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs text-muted-foreground">
+          <Link to="/privacy-policy" className="hover:text-primary">Privacy Policy</Link>
+          <Link to="/terms-of-service" className="hover:text-primary">Terms of Service</Link>
+        </div>
         <p className="text-xs text-muted-foreground">© 2026 Next Cut Barbershop.<br />{t("All rights reserved.")}</p>
       </footer>
 
